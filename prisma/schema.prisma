@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Usuario {
+  id        Int       @id @default(autoincrement())
+  nombre    String
+  email     String     @unique
+  password  String
+  rutinas   Rutina[]
+  entrenos  EntrenoEjercicio[]
+  createdAt DateTime   @default(now())
+}
+
+model Rutina {
+  id        Int         @id @default(autoincrement())
+  nombre    String
+  usuario   Usuario     @relation(fields: [usuarioId], references: [id])
+  usuarioId Int
+  dias      DiaRutina[]
+}
+
+model DiaRutina {
+  id         Int          @id @default(autoincrement())
+  nombre     String        // Ej: "Lunes", "Martes", etc.
+  rutina     Rutina        @relation(fields: [rutinaId], references: [id])
+  rutinaId   Int
+  ejercicios DiaEjercicio[]
+}
+
+model Ejercicio {
+  id           Int               @id @default(autoincrement())
+  nombre       String
+  tipo         String            // "torso" o "pierna"
+  grupoMuscular String           // "pecho", "espalda", "glúteo", etc.
+  entrenos     EntrenoEjercicio[]
+  dias         DiaEjercicio[]
+}
+
+model DiaEjercicio {
+  diaRutina   DiaRutina @relation(fields: [diaRutinaId], references: [id])
+  diaRutinaId Int
+  ejercicio   Ejercicio @relation(fields: [ejercicioId], references: [id])
+  ejercicioId Int
+
+  @@id([diaRutinaId, ejercicioId]) // Clave compuesta (Many-to-Many)
+}
+
+model EntrenoEjercicio {
+  id         Int       @id @default(autoincrement())
+  fecha      DateTime  @default(now())
+  ejercicio  Ejercicio @relation(fields: [ejercicioId], references: [id])
+  ejercicioId Int
+  usuario    Usuario   @relation(fields: [usuarioId], references: [id])
+  usuarioId  Int
+  series     Serie[]
+}
+
+model Serie {
+  id                Int              @id @default(autoincrement())
+  repeticiones      Int
+  peso              Float
+  entrenoEjercicio  EntrenoEjercicio @relation(fields: [entrenoEjercicioId], references: [id])
+  entrenoEjercicioId Int
+}
