@@ -4,7 +4,7 @@ import prisma from "../prisma/client.js";
 export const getUsers = async (req, res, next) => {
   try {
     const users = await prisma.user.findMany({
-      select: { id: true, nombre: true },
+      select: { id: true, name: true },
     });
     res.status(200).json(users);
   } catch (error) {
@@ -17,9 +17,55 @@ export const getUser = async (req, res, next) => {
     const { id } = req.params;
     const users = await prisma.user.findUniqueOrThrow({
       where: { id: Number(id) },
-      select: { id: true, nombre: true },
+      select: { id: true, name: true },
     });
     res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getUserRoutines = async (req, res, next) => {
+  try {
+    const userId = Number(req.params.id); // usamos :id de la URL
+
+    const routines = await prisma.routine.findMany({
+      where: { userId },
+      include: {
+        sets: {
+          include: {
+            exercise: true,
+          },
+        },
+      },
+    });
+
+    res.status(200).json(routines);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getUserRoutine = async (req, res, next) => {
+  try {
+    const userId = Number(req.params.id);
+    const routineId = Number(req.params.routineId);
+
+    const routine = await prisma.routine.findFirstOrThrow({
+      where: {
+        id: routineId,
+        userId: userId,
+      },
+      include: {
+        sets: {
+          include: {
+            exercise: true,
+          },
+        },
+      },
+    });
+
+    res.status(200).json(routine);
   } catch (error) {
     next(error);
   }
@@ -30,7 +76,7 @@ export const createUser = async (req, res, next) => {
     const { nombre, pin } = req.body;
     const newUser = await prisma.user.create({
       data: { nombre: nombre, pin: pin },
-      select: { id: true, nombre: true },
+      select: { id: true, name: true },
     });
     res.status(201).json(newUser);
   } catch (error) {
@@ -51,7 +97,7 @@ export const updateUser = async (req, res, next) => {
         ...(nombre !== undefined && { nombre }),
         ...(pin !== undefined && { pin }),
       },
-      select: { id: true, nombre: true },
+      select: { id: true, name: true },
     });
     res.status(200).json({
       message: `Usuario con id ${updatedUser.id} actualizado correctamente`,

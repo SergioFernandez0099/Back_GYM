@@ -1,0 +1,5 @@
+2025-11-04T19:17:10.605Z 127.0.0.1 - GET /users 404 144 - 2.284 ms Thunder Client (https://www.thunderclient.com)
+2025-11-04T19:17:19.185Z 127.0.0.1 - GET /api/users 400 47 - 51.981 ms Thunder Client (https://www.thunderclient.com)
+2025-11-04T19:19:42.821Z 127.0.0.1 - GET /api/users 200 49 - 57.852 ms Thunder Client (https://www.thunderclient.com)
+2025-11-04T19:27:09.648Z 127.0.0.1 - GET /api/users 200 49 - 45.416 ms Thunder Client (https://www.thunderclient.com)
+2025-11-04T19:27:16.276Z 127.0.0.1 - GET /api/users/1/routines 200 936 - 14.063 ms Thunder Client (https://www.thunderclient.com)
