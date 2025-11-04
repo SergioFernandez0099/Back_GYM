@@ -9,8 +9,8 @@ import { errorHandler } from "./middlewares/errorHandler.js";
 
 const app = express();
 
-const PORT = configApp.port;
-const HOST = configApp.host;
+const PORT = configApp.port || 5555;
+const HOST = configApp.host || "127.0.0.1";
 
 app.use(express.json());
 app.use(cors());
