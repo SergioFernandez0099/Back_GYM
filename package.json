@@ -2,10 +2,10 @@
   "name": "Back_GYM",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
-    "run": "pnpm node server.js",
+    "run": "pnpm node src/server.js",
     "dev": "pnpm nodemon src/server.js"
   },
   "keywords": [],
@@ -15,10 +15,10 @@
   "devDependencies": {
     "dotenv": "^17.2.3",
     "nodemon": "^3.1.10",
-    "prisma": "^6.17.1"
+    "prisma": "^6.18.0"
   },
   "dependencies": {
-    "@prisma/client": "^6.17.1",
+    "@prisma/client": "^6.18.0",
     "bcrypt": "^6.0.0",
     "compression": "^1.8.1",
     "cors": "^2.8.5",

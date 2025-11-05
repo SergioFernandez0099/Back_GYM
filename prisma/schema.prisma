@@ -27,11 +27,20 @@ model User {
 
 // ------------------- Ejercicios -------------------
 model Exercise {
-  id        Int                       @id @default(autoincrement())
-  name      String
-  imageUrl  String?
-  sets      RoutineSet[]              @relation("ExerciseToRoutineSet")
-  logs      TrainingSessionExercise[]
+  id          Int                       @id @default(autoincrement())
+  name        String
+  imageUrl    String?
+  sets        RoutineSet[]              @relation("ExerciseToRoutineSet")
+  logs        TrainingSessionExercise[]
+  muscleGroupId Int?
+  muscleGroup  MuscleGroup?              @relation(fields: [muscleGroupId], references: [id])
+}
+
+// ------------------- Grupos musculares -------------------
+model MuscleGroup {
+  id        Int         @id @default(autoincrement())
+  name      String      @unique
+  exercises Exercise[]
 }
 
 // ------------------- Rutinas -------------------
