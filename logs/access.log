@@ -126,3 +126,130 @@
 2025-11-05T00:59:24.731Z 127.0.0.1 - GET /api/exercises 404 152 - 0.576 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
 2025-11-05T00:59:28.556Z 127.0.0.1 - GET /api/exercises 404 152 - 0.624 ms Thunder Client (https://www.thunderclient.com)
 2025-11-05T00:59:29.269Z 127.0.0.1 - GET /api/exercises 404 152 - 0.310 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T01:05:29.174Z 127.0.0.1 - GET /api/exercises 200 3394 - 48.779 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T01:07:02.528Z 127.0.0.1 - GET /api/exercises 304 - - 4.008 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:07:08.467Z 127.0.0.1 - GET /api/exercises 304 - - 2.713 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:07:17.887Z 127.0.0.1 - GET /api/exercises 304 - - 3.010 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:07:48.601Z 127.0.0.1 - GET /api/exercises 304 - - 3.189 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:08:13.650Z 127.0.0.1 - GET /api/exercises 304 - - 4.605 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:08:46.733Z 127.0.0.1 - GET /api/exercises 304 - - 3.444 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:10:02.613Z 127.0.0.1 - GET /api/exercises 304 - - 2.414 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:10:41.702Z 127.0.0.1 - GET /api/exercises 304 - - 165.102 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:11:20.645Z 127.0.0.1 - GET /api/exercises 200 3395 - 3.665 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:12:12.084Z 127.0.0.1 - GET /api/exercises 304 - - 3.140 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:12:16.109Z 127.0.0.1 - GET /api/exercises 304 - - 3.519 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:12:19.949Z 127.0.0.1 - GET /api/exercises 304 - - 2.974 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:12:28.589Z 127.0.0.1 - GET /api/exercises 304 - - 3.032 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:12:32.441Z 127.0.0.1 - GET /api/exercises 304 - - 2.212 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:12:45.663Z 127.0.0.1 - GET /api/exercises 304 - - 2.577 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:12:47.893Z 127.0.0.1 - GET /api/exercises 304 - - 2.290 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:12:52.806Z 127.0.0.1 - GET /api/exercises 304 - - 1.976 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:12:58.614Z 127.0.0.1 - GET /api/exercises 304 - - 2.698 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:13:15.821Z 127.0.0.1 - GET /api/exercises 304 - - 2.403 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:14:22.790Z 127.0.0.1 - GET /api/exercises 304 - - 3.012 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:14:23.963Z 127.0.0.1 - GET /api/exercises 304 - - 2.170 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:14:25.829Z 127.0.0.1 - GET /api/exercises 304 - - 2.424 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:14:37.528Z 127.0.0.1 - GET /api/exercises 304 - - 1.826 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36
+2025-11-05T01:15:23.390Z 127.0.0.1 - GET /api/users/1/routines 304 - - 13.269 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T01:15:25.522Z 127.0.0.1 - GET /api/users/1/routines/1 200 2 - 5.089 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T01:20:13.062Z 127.0.0.1 - GET /api/users/1/routines 304 - - 56.308 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T01:20:21.776Z 127.0.0.1 - GET /api/exercises 304 - - 4.651 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T01:20:23.191Z 127.0.0.1 - GET /api/users/1/routines 304 - - 2.577 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T01:21:44.303Z 127.0.0.1 - GET /api/users/1/routines 304 - - 3.778 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T01:21:46.683Z 127.0.0.1 - GET /api/users/1/routines/1 304 - - 5.859 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T01:21:46.694Z 127.0.0.1 - GET /api/users/1/routines/Torso%201 400 47 - 11.957 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T01:21:48.273Z 127.0.0.1 - GET /api/users/1/routines 304 - - 1.790 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T01:21:49.006Z 127.0.0.1 - GET /api/users/1/routines/1 304 - - 2.837 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T01:21:49.010Z 127.0.0.1 - GET /api/users/1/routines/Pierna%201 400 47 - 3.335 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T01:21:49.975Z 127.0.0.1 - GET /api/users/1/routines 304 - - 1.341 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T01:22:58.642Z 127.0.0.1 - GET /api/users/1/routines/1 304 - - 3.578 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T01:22:58.653Z 127.0.0.1 - GET /api/users/1/routines/Torso%201 400 47 - 4.522 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T01:24:03.075Z 127.0.0.1 - GET /api/exercises 200 3395 - 2.091 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T01:24:08.651Z 127.0.0.1 - GET /api/users 200 49 - 2.682 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T01:24:13.446Z 127.0.0.1 - GET /api/users/1/routines 200 54 - 2.281 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T01:24:23.130Z 127.0.0.1 - GET /api/users/1/routines 200 54 - 1.374 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T01:24:30.724Z 127.0.0.1 - GET /api/users/1/routines 200 54 - 1.878 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T01:24:47.552Z 127.0.0.1 - GET /api/users/1/routines/1 200 2 - 2.341 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T01:24:50.460Z 127.0.0.1 - GET /api/users/1/routines 200 54 - 1.272 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T13:56:43.410Z 127.0.0.1 - GET /api/users/1/routines 200 54 - 128.737 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T13:56:48.898Z 127.0.0.1 - GET /api/users/1/routines/1 200 2 - 10.277 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T13:56:52.395Z 127.0.0.1 - GET /api/users/1/routines 200 54 - 2.127 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T13:57:02.440Z 127.0.0.1 - GET /api/users/1/routines/1/sets 404 166 - 1.333 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T13:57:06.456Z 127.0.0.1 - GET /api/users/1/routines/1/ 200 2 - 2.618 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T13:57:07.488Z 127.0.0.1 - GET /api/users/1/routines/1 200 2 - 2.181 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T13:58:52.010Z 127.0.0.1 - GET /api/users/1/routines/1 200 2 - 3.135 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T13:58:52.519Z 127.0.0.1 - GET /api/users/1/routines/1 200 2 - 2.163 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:06:01.720Z 127.0.0.1 - GET /api/users 200 49 - 160.415 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:06:04.575Z 127.0.0.1 - GET /api/users/2 200 23 - 7.282 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:06:08.392Z 127.0.0.1 - GET /api/users/2/ro 404 153 - 1.311 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:06:11.271Z 127.0.0.1 - GET /api/users/2/routines 200 2 - 4.721 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:10:34.951Z 127.0.0.1 - GET /api/users 200 123 - 46.105 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:10:45.753Z 127.0.0.1 - GET /api/users/2 200 23 - 5.925 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:10:49.118Z 127.0.0.1 - GET /api/users/2/routines 200 2 - 4.943 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:10:52.992Z 127.0.0.1 - GET /api/users/5/routines 200 2 - 1.700 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:11:08.155Z 127.0.0.1 - GET /api/users/3/routines 200 33 - 3.345 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:11:17.908Z 127.0.0.1 - GET /api/users/3/routines/1 200 2 - 4.637 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:11:19.822Z 127.0.0.1 - GET /api/users/3/routines/2 200 2 - 2.429 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:11:22.436Z 127.0.0.1 - GET /api/users/3/routines/3 200 614 - 3.953 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:14:26.221Z 127.0.0.1 - GET /api/users/3/routines 200 33 - 2.969 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:14:32.746Z 127.0.0.1 - GET /api/users/3/routines/3 200 614 - 2.853 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:17:58.207Z 127.0.0.1 - GET /api/users/3/routines 200 33 - 56.070 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:18:08.860Z 127.0.0.1 - GET /api/users/1/routines/1 304 - - 4.392 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:18:08.871Z 127.0.0.1 - GET /api/users/1/routines/Full%20Body%20Pro 400 47 - 9.627 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:22:11.644Z 127.0.0.1 - GET /api/users/1/routines/Full%20Body%20Pro 400 47 - 4.897 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:22:16.583Z 127.0.0.1 - GET /api/users/1/routines/Full%20Body%20Pro 400 47 - 4.137 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:22:18.569Z 127.0.0.1 - GET /api/users/1/routines/Full%20Body%20Pro 400 47 - 2.356 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:22:34.575Z 127.0.0.1 - GET /api/users/1/routines/Full%20Body%20Pro 400 47 - 2.786 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:22:36.595Z 127.0.0.1 - GET /api/users/1/routines/Full%20Body%20Pro 400 47 - 3.053 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:22:39.604Z 127.0.0.1 - GET /api/users/1/routines/Full%20Body%20Pro 400 47 - 2.511 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:22:43.370Z 127.0.0.1 - GET /api/users/3/routines 304 - - 1.944 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:22:44.111Z 127.0.0.1 - GET /api/users/1/routines/undefined 400 47 - 3.545 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:22:44.117Z 127.0.0.1 - GET /api/users/1/routines/Full%20Body%20Pro 400 47 - 2.870 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:23:10.890Z 127.0.0.1 - GET /api/users/1/routines/undefined 400 47 - 159.459 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:23:25.917Z 127.0.0.1 - GET /api/users/3/routines 304 - - 5.228 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:23:28.318Z 127.0.0.1 - GET /api/users/1/routines/undefined 400 47 - 3.802 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:23:28.322Z 127.0.0.1 - GET /api/users/1/routines/Full%20Body%20Pro 400 47 - 2.124 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:24:11.874Z 127.0.0.1 - GET /api/users/3/routines 200 33 - 2.078 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:24:41.654Z 127.0.0.1 - GET /api/users/1/routines/Full%20Body%20Pro 400 47 - 4.423 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:24:52.580Z 127.0.0.1 - GET /api/users/1/routines/Full%20Body%20Pro 400 47 - 3.385 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:24:53.436Z 127.0.0.1 - GET /api/users/3/routines 304 - - 2.786 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:25:00.688Z 127.0.0.1 - GET /api/users/1/routines/Full%20Body%20Pro 400 47 - 3.014 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:25:02.463Z 127.0.0.1 - GET /api/users/3/routines 304 - - 1.443 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:25:03.253Z 127.0.0.1 - GET /api/users/1/routines/undefined 400 47 - 2.916 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:25:03.256Z 127.0.0.1 - GET /api/users/1/routines/[object%20Object] 400 47 - 2.067 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:25:30.839Z 127.0.0.1 - GET /api/users/3/routines 304 - - 2.740 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:26:03.430Z 127.0.0.1 - GET /api/users/3/routines 200 33 - 2.218 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:26:17.610Z 127.0.0.1 - GET /api/users/1/routines/[object%20Object] 400 47 - 3.470 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:26:26.606Z 127.0.0.1 - GET /api/users/3/routines 304 - - 2.393 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:26:27.442Z 127.0.0.1 - GET /api/users/1/routines/3 200 2 - 4.159 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:26:27.444Z 127.0.0.1 - GET /api/users/1/routines/[object%20Object] 400 47 - 2.241 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:26:52.359Z 127.0.0.1 - GET /api/users/3/routines 304 - - 1.797 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:27:54.258Z 127.0.0.1 - GET /api/users/3/routines 304 - - 1.901 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:29:25.504Z 127.0.0.1 - GET /api/users/3/routines/3 200 614 - 41.704 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:29:31.102Z 127.0.0.1 - GET /api/users/1/routines/3 200 2 - 2.704 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:29:55.700Z 127.0.0.1 - GET /api/users/1/routines/[object%20Object] 400 47 - 3.092 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:30:49.589Z 127.0.0.1 - GET /api/users/1/routines/NaN 400 47 - 2.572 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:30:59.502Z 127.0.0.1 - GET /api/users/1/routines/NaN 400 47 - 3.015 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:31:08.315Z 127.0.0.1 - GET /api/users/3/routines 304 - - 2.781 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:31:42.224Z 127.0.0.1 - GET /api/users/1/routines/3 304 - - 3.447 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:31:46.113Z 127.0.0.1 - GET /api/users/1/routines/NaN 400 47 - 2.520 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:33:27.782Z 127.0.0.1 - GET /api/users/3/routines/3 200 614 - 54.328 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:33:34.847Z 127.0.0.1 - GET /api/users/3/routines 200 33 - 2.879 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:33:56.419Z 127.0.0.1 - GET /api/users/3/routines 304 - - 3.530 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:34:08.365Z 127.0.0.1 - GET /api/users/1/routines/3 304 - - 3.635 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:34:08.375Z 127.0.0.1 - GET /api/users/1/routines/NaN 400 47 - 12.629 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:36:41.434Z 127.0.0.1 - GET /api/users/3/routines 304 - - 2.460 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:36:42.482Z 127.0.0.1 - GET /api/users/1/routines/3 304 - - 2.544 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:36:42.485Z 127.0.0.1 - GET /api/users/1/routines/NaN 400 47 - 4.828 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:37:21.979Z 127.0.0.1 - GET /api/users/3/routines/3 200 614 - 3.788 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T14:38:06.304Z 127.0.0.1 - GET /api/users/3/routines 304 - - 2.564 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:38:29.756Z 127.0.0.1 - GET /api/users/1/routines/3 304 - - 56.170 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:38:29.758Z 127.0.0.1 - GET /api/users/1/routines/NaN 400 47 - 56.605 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:40:14.403Z 127.0.0.1 - GET /api/users/3/routines 304 - - 4.431 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:41:00.597Z 127.0.0.1 - GET /api/users/1/routines/3 304 - - 7.476 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:41:00.643Z 127.0.0.1 - GET /api/users/3/routines/NaN 400 47 - 3.921 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:41:01.203Z 127.0.0.1 - GET /api/users/1/routines/NaN 400 47 - 4.989 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:41:06.509Z 127.0.0.1 - GET /api/users/3/routines/NaN 400 47 - 3.447 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:41:10.078Z 127.0.0.1 - GET /api/users/3/routines 304 - - 2.522 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:41:10.880Z 127.0.0.1 - GET /api/users/3/routines/3 200 614 - 6.022 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T14:41:10.882Z 127.0.0.1 - GET /api/users/3/routines/NaN 400 47 - 2.990 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
