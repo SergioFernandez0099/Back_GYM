@@ -31,12 +31,9 @@ export const getUserRoutines = async (req, res, next) => {
 
     const routines = await prisma.routine.findMany({
       where: { userId },
-      include: {
-        sets: {
-          include: {
-            exercise: true,
-          },
-        },
+      select: {
+        id: true,
+        name: true,
       },
     });
 
@@ -46,26 +43,24 @@ export const getUserRoutines = async (req, res, next) => {
   }
 };
 
-export const getUserRoutine = async (req, res, next) => {
+export const getUserRoutineSets = async (req, res, next) => {
   try {
     const userId = Number(req.params.id);
     const routineId = Number(req.params.routineId);
 
-    const routine = await prisma.routine.findFirstOrThrow({
+      const sets = await prisma.routineSet.findMany({
       where: {
-        id: routineId,
-        userId: userId,
+        routineId,
+        routine: {
+          userId, // aseguramos que la rutina pertenece al usuario
+        },
       },
       include: {
-        sets: {
-          include: {
-            exercise: true,
-          },
-        },
+        exercise: true, // si quieres info del ejercicio (nombre, imagen, etc.)
       },
     });
 
-    res.status(200).json(routine);
+    res.status(200).json(sets);
   } catch (error) {
     next(error);
   }
