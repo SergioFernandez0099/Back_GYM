@@ -30,14 +30,14 @@ INSERT INTO "Exercise" (name, "imageUrl", "muscleGroupId") VALUES
 -- Espalda (id = 2)
 INSERT INTO "Exercise" (name, "imageUrl", "muscleGroupId") VALUES
 ('Peso muerto', '/assets/images/exercises/espalda/peso_muerto.png', 2),
-('Dominadas', '/assets/images/exercises/espalda/dominadas.png', 2),
-('Remo con barra', '/assets/images/exercises/espalda/remo_barra.png', 2),
+('Dominadas', '/assets/images/exercises/espalda/dominadas.avif', 2),
+('Remo con barra', '/assets/images/exercises/espalda/remo_barra.avif', 2),
 ('Remo con mancuerna', '/assets/images/exercises/espalda/remo_mancuerna.png', 2),
 ('Jalón al pecho', '/assets/images/exercises/espalda/jalon_pecho.png', 2);
 
 -- Hombro (id = 3)
 INSERT INTO "Exercise" (name, "imageUrl", "muscleGroupId") VALUES
-('Press militar', '/assets/images/exercises/hombro/press_militar.png', 3),
+('Press militar', '/assets/images/exercises/hombro/press_militar.avif', 3),
 ('Elevaciones laterales', '/assets/images/exercises/hombro/elevaciones_laterales.png', 3),
 ('Elevaciones frontales', '/assets/images/exercises/hombro/elevaciones_frontales.png', 3),
 ('Pájaros', '/assets/images/exercises/hombro/pajaros.png', 3);
@@ -56,7 +56,7 @@ INSERT INTO "Exercise" (name, "imageUrl", "muscleGroupId") VALUES
 
 -- Cuádriceps (id = 6)
 INSERT INTO "Exercise" (name, "imageUrl", "muscleGroupId") VALUES
-('Sentadilla', '/assets/images/exercises/cuadriceps/sentadilla.png', 6),
+('Sentadilla', '/assets/images/exercises/cuadriceps/sentadilla.avif', 6),
 ('Prensa', '/assets/images/exercises/cuadriceps/prensa.png', 6),
 ('Hack squat', '/assets/images/exercises/cuadriceps/hack_squat.png', 6),
 ('Zancadas', '/assets/images/exercises/cuadriceps/zancadas.png', 6);
@@ -64,7 +64,7 @@ INSERT INTO "Exercise" (name, "imageUrl", "muscleGroupId") VALUES
 -- Isquios (id = 7)
 INSERT INTO "Exercise" (name, "imageUrl", "muscleGroupId") VALUES
 ('Curl femoral tumbado', '/assets/images/exercises/isquios/curl_femoral_tumbado.png', 7),
-('Peso muerto rumano', '/assets/images/exercises/isquios/peso_muerto_rumano.png', 7);
+('Peso muerto rumano', '/assets/images/exercises/isquios/peso_muerto_rumano.avif', 7);
 
 -- Glúteo (id = 8)
 INSERT INTO "Exercise" (name, "imageUrl", "muscleGroupId") VALUES

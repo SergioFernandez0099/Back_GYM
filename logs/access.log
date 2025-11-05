@@ -364,3 +364,7 @@
 2025-11-05T16:54:31.713Z 127.0.0.1 - GET /api/users/3/routines 200 61 - 1.454 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
 2025-11-05T16:57:05.195Z 127.0.0.1 - GET /api/users/3/routines 304 - - 171.858 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
 2025-11-05T16:58:54.933Z 127.0.0.1 - GET /api/users/3/routines 304 - - 65.019 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-05T18:44:16.743Z 127.0.0.1 - GET /api/users 200 123 - 78.943 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T18:44:24.483Z 127.0.0.1 - GET /api/users/3 200 24 - 8.273 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T18:44:29.277Z 127.0.0.1 - GET /api/users/3/routines 200 61 - 4.852 ms Thunder Client (https://www.thunderclient.com)
+2025-11-05T18:44:40.815Z 127.0.0.1 - GET /api/users/3/routines/3/sets 200 614 - 7.229 ms Thunder Client (https://www.thunderclient.com)
