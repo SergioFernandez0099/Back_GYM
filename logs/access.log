@@ -508,3 +508,11 @@
 2025-11-06T01:00:55.598Z 127.0.0.1 - GET /api/exercises 200 3678 - 53.076 ms Thunder Client (https://www.thunderclient.com)
 2025-11-06T01:01:56.481Z 127.0.0.1 - GET /api/exercises 200 3678 - 51.264 ms Thunder Client (https://www.thunderclient.com)
 2025-11-06T01:04:28.761Z 127.0.0.1 - GET /api/muscleGroups 500 33 - 4.363 ms Thunder Client (https://www.thunderclient.com)
+2025-11-06T01:04:50.079Z 127.0.0.1 - GET /api/muscleGroups 200 319 - 48.771 ms Thunder Client (https://www.thunderclient.com)
+2025-11-06T11:27:18.903Z 127.0.0.1 - GET /api/exercises 400 47 - 11.413 ms Thunder Client (https://www.thunderclient.com)
+2025-11-06T11:27:21.039Z 127.0.0.1 - GET /api/exercises 400 47 - 2.402 ms Thunder Client (https://www.thunderclient.com)
+2025-11-06T11:28:54.783Z 127.0.0.1 - GET /api/exercises 200 4872 - 129.448 ms Thunder Client (https://www.thunderclient.com)
+2025-11-06T11:37:35.485Z 127.0.0.1 - GET /api/exercises 200 4872 - 68.010 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-06T11:37:35.500Z 127.0.0.1 - GET /api/exercises 304 - - 3.644 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-06T11:37:59.182Z 127.0.0.1 - GET /api/muscleGroups 200 319 - 4.750 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+2025-11-06T11:37:59.209Z 127.0.0.1 - GET /api/exercises 304 - - 2.796 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36

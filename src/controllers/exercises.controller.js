@@ -7,6 +7,11 @@ export const getExercises = async (req, res, next) => {
         id: true,
         name: true,
         imageUrl: true,
+        muscleGroup: {
+          select: {
+            name:true
+          }
+        }
       },
       orderBy: [
         {

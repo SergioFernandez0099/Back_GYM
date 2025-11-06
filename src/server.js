@@ -7,12 +7,13 @@ import exercisesRoutes from "./routes/exercises.routes.js";
 import muscleGroupsRoutes from "./routes/muscleGroups.routes.js";
 import { configApp } from "./config/config.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
+import os from "os"; // Importamos para obtener la IP local
 
 
 const app = express();
 
 const PORT = configApp.port || 5555;
-const HOST = configApp.host || "127.0.0.1";
+const HOST = configApp.host || "0.0.0.0";
 
 app.use(express.json());
 app.use(cors());
@@ -29,9 +30,23 @@ app.use('/api/muscleGroups', muscleGroupsRoutes);
 // Error handler
 app.use(errorHandler);
 
+// Función para obtener la IP local
+function getLocalIP() {
+  const interfaces = os.networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]) {
+      if (iface.family === 'IPv4' && !iface.internal) {
+        return iface.address;
+      }
+    }
+  }
+  return '127.0.0.1';
+}
+
 app.listen(PORT, HOST, () => {
+  const localIP = getLocalIP();
   console.log(`Servidor activo en http://${HOST}:${PORT}`);
-  console.log(`Acceso en red local: http://<TU_IP_LOCAL>:${PORT}`);
+  console.log(`Acceso en red local: http://${localIP}:${PORT}`);
 });
 
 /*
