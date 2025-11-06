@@ -4,6 +4,7 @@ import { loggerMiddleware } from "./middlewares/logger.js";
 import usersRoutes from "./routes/users.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import exercisesRoutes from "./routes/exercises.routes.js";
+import muscleGroupsRoutes from "./routes/muscleGroups.routes.js";
 import { configApp } from "./config/config.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 
@@ -23,6 +24,7 @@ app.use(loggerMiddleware);
 app.use('login', authRoutes)
 app.use('/api/users', usersRoutes);
 app.use('/api/exercises', exercisesRoutes);
+app.use('/api/muscleGroups', muscleGroupsRoutes);
 
 // Error handler
 app.use(errorHandler);
