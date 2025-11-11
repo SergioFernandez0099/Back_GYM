@@ -1,155 +1,100 @@
 import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('🌱 Iniciando seed de usuarios, rutinas y sesiones...');
+  console.log('🌱 Iniciando seed completo...');
 
   // ---------------------------------------------------------
-  // 1️⃣ Crear usuarios
+  // 1️⃣ Borrar datos existentes (en desarrollo)
   // ---------------------------------------------------------
-  const users = await prisma.user.createMany({
-    data: [
-      { name: 'Carlos', passwordHash: 'hashed_carlos' },
-      { name: 'Lucía', passwordHash: 'hashed_lucia' },
-      { name: 'Pedro', passwordHash: 'hashed_pedro' },
-    ],
+  await prisma.trainingSession.deleteMany();
+  await prisma.routine.deleteMany();
+  await prisma.exercise.deleteMany();
+  await prisma.muscleGroup.deleteMany();
+  await prisma.user.deleteMany();
+
+  // ---------------------------------------------------------
+  // 2️⃣ Insertar grupos musculares
+  // ---------------------------------------------------------
+  const muscleGroupsData = [
+    'Pecho','Espalda','Hombro','Bíceps','Tríceps',
+    'Cuádriceps','Isquios','Glúteo','Gemelo','Adductor',
+    'Abductor','Abdomen'
+  ].map(name => ({ name }));
+
+  const muscleGroups = await prisma.muscleGroup.createMany({
+    data: muscleGroupsData
   });
 
-  console.log(`✅ ${users.count} usuarios creados`);
+  console.log(`✅ ${muscleGroupsData.length} grupos musculares creados`);
 
   // ---------------------------------------------------------
-  // 2️⃣ Obtener algunos ejercicios ya existentes
+  // 3️⃣ Insertar ejercicios
   // ---------------------------------------------------------
-  const pressBanca = await prisma.exercise.findFirst({ where: { name: 'Press banca' } });
-  const dominadas = await prisma.exercise.findFirst({ where: { name: 'Dominadas' } });
-  const sentadilla = await prisma.exercise.findFirst({ where: { name: 'Sentadilla' } });
-  const curlBiceps = await prisma.exercise.findFirst({ where: { name: 'Curl con barra' } });
-  const pressMilitar = await prisma.exercise.findFirst({ where: { name: 'Press militar' } });
+  const exercisesData = [
+    { name: 'Press banca', imageUrl: '/assets/images/exercises/pecho/press_banca.png', muscleGroupId: 1 },
+    { name: 'Press inclinado', imageUrl: '/assets/images/exercises/pecho/press_inclinado.png', muscleGroupId: 1 },
+    { name: 'Fondos en paralelas', imageUrl: '/assets/images/exercises/pecho/fondos_en_paralelas.png', muscleGroupId: 1 },
+    { name: 'Curl con barra', imageUrl: '/assets/images/exercises/biceps/curl_barra.png', muscleGroupId: 4 },
+    { name: 'Sentadilla', imageUrl: '/assets/images/exercises/cuadriceps/sentadilla.avif', muscleGroupId: 6 },
+    { name: 'Press militar', imageUrl: '/assets/images/exercises/hombro/press_militar.avif', muscleGroupId: 3 },
+    { name: 'Dominadas', imageUrl: '/assets/images/exercises/espalda/dominadas.avif', muscleGroupId: 2 },
+  ];
 
-  if (!pressBanca || !dominadas || !sentadilla) {
-    console.log('❌ Faltan ejercicios base en la DB. Asegúrate de haber hecho el seed de ejercicios antes.');
-    return;
-  }
+  await prisma.exercise.createMany({ data: exercisesData });
+  console.log(`✅ ${exercisesData.length} ejercicios creados`);
 
   // ---------------------------------------------------------
-  // 3️⃣ Crear rutinas para cada usuario
+  // 4️⃣ Crear usuarios
+  // ---------------------------------------------------------
+  const saltRounds = 10;
+  const usersData = [
+    { name: 'Carlos', pin: await bcrypt.hash('1234', saltRounds) },
+    { name: 'Lucía', pin: await bcrypt.hash('5678', saltRounds) },
+    { name: 'Pedro', pin: await bcrypt.hash('abcd', saltRounds) },
+  ];
+
+  await prisma.user.createMany({ data: usersData });
+  console.log(`✅ ${usersData.length} usuarios creados`);
+
+  // ---------------------------------------------------------
+  // 5️⃣ Crear rutinas y sesiones
   // ---------------------------------------------------------
   const userCarlos = await prisma.user.findFirst({ where: { name: 'Carlos' } });
   const userLucia = await prisma.user.findFirst({ where: { name: 'Lucía' } });
+  const pressBanca = await prisma.exercise.findFirst({ where: { name: 'Press banca' } });
+  const sentadilla = await prisma.exercise.findFirst({ where: { name: 'Sentadilla' } });
 
-  // Rutina de Carlos (Full Body)
+  // Rutina de Carlos
   const rutinaCarlos = await prisma.routine.create({
     data: {
       name: 'Full Body Pro',
-      description: 'Rutina general de cuerpo completo para fuerza y resistencia.',
       userId: userCarlos.id,
       sets: {
         create: [
           { series: 3, repetitions: 10, exerciseId: pressBanca.id },
           { series: 4, repetitions: 8, exerciseId: sentadilla.id },
-          { series: 3, repetitions: 8, exerciseId: dominadas.id },
-        ],
-      },
+        ]
+      }
     },
-    include: { sets: true },
   });
 
-  // Rutina de Lucía (Push)
-  const rutinaLucia = await prisma.routine.create({
-    data: {
-      name: 'Push Day',
-      description: 'Rutina enfocada en pecho, hombros y tríceps.',
-      userId: userLucia.id,
-      sets: {
-        create: [
-          { series: 3, repetitions: 12, exerciseId: pressBanca.id },
-          { series: 3, repetitions: 10, exerciseId: pressMilitar ? pressMilitar.id : pressBanca.id },
-        ],
-      },
-    },
-    include: { sets: true },
-  });
+  console.log(`✅ Rutina creada para Carlos: ${rutinaCarlos.name}`);
 
-  console.log(`✅ Rutinas creadas: ${rutinaCarlos.name}, ${rutinaLucia.name}`);
-
-  // ---------------------------------------------------------
-  // 4️⃣ Crear sesiones de entrenamiento (basadas en las rutinas)
-  // ---------------------------------------------------------
-  const sessionCarlos = await prisma.trainingSession.create({
+  // Sesión de Carlos
+  await prisma.trainingSession.create({
     data: {
       userId: userCarlos.id,
       routineName: rutinaCarlos.name,
-      notes: 'Entrenamiento intenso, buenas sensaciones.',
-      sessionExercises: {
-        create: [
-          {
-            exerciseId: pressBanca.id,
-            seriesNumber: 1,
-            repetitions: {
-              create: [
-                { weight: 60, completed: true },
-                { weight: 60, completed: true },
-                { weight: 60, completed: false, notes: 'falló la última' },
-              ],
-            },
-          },
-          {
-            exerciseId: sentadilla.id,
-            seriesNumber: 1,
-            repetitions: {
-              create: [
-                { weight: 80, completed: true },
-                { weight: 80, completed: true },
-                { weight: 80, completed: true },
-              ],
-            },
-          },
-        ],
-      },
-    },
-    include: { sessionExercises: { include: { repetitions: true } } },
+      notes: 'Primera sesión completa',
+    }
   });
 
-  const sessionLucia = await prisma.trainingSession.create({
-    data: {
-      userId: userLucia.id,
-      routineName: rutinaLucia.name,
-      notes: 'Buen progreso en los hombros.',
-      sessionExercises: {
-        create: [
-          {
-            exerciseId: pressMilitar ? pressMilitar.id : pressBanca.id,
-            seriesNumber: 1,
-            repetitions: {
-              create: [
-                { weight: 25, completed: true },
-                { weight: 25, completed: true },
-                { weight: 25, completed: true },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  });
+  console.log('✅ Sesión creada para Carlos');
 
-  console.log(`✅ Sesiones creadas para ${userCarlos.name} y ${userLucia.name}`);
-
-  // ---------------------------------------------------------
-  // 5️⃣ Crear sesión vacía para Pedro
-  // ---------------------------------------------------------
-  const userPedro = await prisma.user.findFirst({ where: { name: 'Pedro' } });
-  await prisma.trainingSession.create({
-    data: {
-      userId: userPedro.id,
-      routineName: 'Sin rutina asignada',
-      notes: 'Primera sesión aún sin ejercicios.',
-    },
-  });
-
-  console.log('✅ Sesión vacía creada para Pedro');
-  console.log('🌱 Seed completado correctamente.');
+  console.log('🌱 Seed completado correctamente');
 }
 
 main()

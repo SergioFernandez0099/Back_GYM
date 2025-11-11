@@ -17,8 +17,8 @@ generator client {
 // ------------------- Usuarios -------------------
 model User {
   id           Int                @id @default(autoincrement())
-  name         String
-  passwordHash String
+  name         String             @unique
+  pin          String
   createdAt    DateTime           @default(now())
 
   routines     Routine[]
