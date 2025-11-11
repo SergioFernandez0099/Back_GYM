@@ -8,6 +8,7 @@ import muscleGroupsRoutes from "./routes/muscleGroups.routes.js";
 import { configApp } from "./config/config.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 import os from "os"; // Importamos para obtener la IP local
+import cookieParser from "cookie-parser";
 
 
 const app = express();
@@ -16,13 +17,21 @@ const PORT = configApp.port || 5555;
 const HOST = configApp.host || "0.0.0.0";
 
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser())
+app.use(
+  cors({
+      origin: ["http://localhost:5173", "http://192.168.1.153:5173"],
+    //  origin: true, // permite cualquier origen
+    credentials: true, // permite enviar cookies
+  })
+);
+
 
 // Middleware de logging
 app.use(loggerMiddleware);
 
 // Rutas
-app.use('login', authRoutes)
+app.use("/api/auth", authRoutes); 
 app.use('/api/users', usersRoutes);
 app.use('/api/exercises', exercisesRoutes);
 app.use('/api/muscleGroups', muscleGroupsRoutes);

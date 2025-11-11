@@ -5,16 +5,14 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 export const configApp = {
-    port: process.env.PORT,
-    version: process.env.VERSION,
-    host: process.env.HOST
+  port: process.env.PORT,
+  version: process.env.VERSION,
+  host: process.env.HOST,
+  databaseUrl: process.env.DATABASE_URL,
+  frontendUrl: process.env.FRONTEND_URL,
+  bcryptSaltRounds: parseInt(process.env.BCRYPT_SALT_ROUNDS) || 10,
 };
 export const jwt = {
-    secret: process.env.JET_SECRET,
-};
-export const mysql = {
-    host: process.env.MYSQL_HOST,
-    user: process.env.MYSQL_USER,
-    database: process.env.MYSQL_DB,
-    password: process.env.MYSQL_PASSWORD,
+  jwtSecret: process.env.JET_SECRET,
+  jwtExpiresIn: process.env.JWT_EXPIRES_IN || "7d",
 };

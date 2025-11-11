@@ -1,4 +1,6 @@
 import { ErrorIncorrectParam } from "../errors/businessErrors.js";
+import bcrypt from "bcrypt";
+import { configApp } from "../config/config.js";
 import prisma from "../prisma/client.js";
 
 export const getUsers = async (req, res, next) => {
@@ -27,9 +29,10 @@ export const getUser = async (req, res, next) => {
 
 export const createUser = async (req, res, next) => {
   try {
-    const { nombre, pin } = req.body;
+    const { name, pin } = req.body;
+    const hashedPin = await bcrypt.hash(pin, configApp.bcryptSaltRounds);
     const newUser = await prisma.user.create({
-      data: { nombre: nombre, pin: pin },
+      data: { name: name, pin: hashedPin },
       select: { id: true, name: true },
     });
     res.status(201).json(newUser);
@@ -41,20 +44,27 @@ export const createUser = async (req, res, next) => {
 export const updateUser = async (req, res, next) => {
   try {
     const id = Number(req.params.id);
-    const { nombre, pin } = req.body;
-    if (!nombre && !pin) {
+    const { name, pin } = req.body;
+
+    if (!name && !pin) {
       throw new ErrorIncorrectParam(
         "Debes enviar al menos un campo para actualizar"
       );
     }
+
+    const dataToUpdate = {
+      ...(name !== undefined && { name }),
+      ...(pin !== undefined && {
+        pin: await bcrypt.hash(pin, configApp.bcryptSaltRounds),
+      }),
+    };
+
     const updatedUser = await prisma.user.update({
       where: { id },
-      data: {
-        ...(nombre !== undefined && { nombre }),
-        ...(pin !== undefined && { pin }),
-      },
+      data: dataToUpdate,
       select: { id: true, name: true },
     });
+
     res.status(200).json({
       message: `Usuario con id ${updatedUser.id} actualizado correctamente`,
       user: updatedUser,
