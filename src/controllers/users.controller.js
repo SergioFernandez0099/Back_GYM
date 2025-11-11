@@ -89,7 +89,6 @@ export const deleteUser = async (req, res, next) => {
   }
 };
 
-
 export const getUserRoutines = async (req, res, next) => {
   try {
     const userId = Number(req.params.id); // usamos :id de la URL
@@ -122,7 +121,7 @@ export const createUserRoutine = async (req, res, next) => {
         name,
         user: { connect: { id: userId } },
       },
-      select: { id: true, name: true, },
+      select: { id: true, name: true },
     });
 
     res.status(201).json(newRoutine);
@@ -190,7 +189,7 @@ export const getUserRoutineSets = async (req, res, next) => {
     const userId = Number(req.params.id);
     const routineId = Number(req.params.routineId);
 
-      const sets = await prisma.routineSet.findMany({
+    const sets = await prisma.routineSet.findMany({
       where: {
         routineId,
         routine: {

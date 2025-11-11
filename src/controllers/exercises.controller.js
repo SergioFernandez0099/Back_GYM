@@ -9,9 +9,9 @@ export const getExercises = async (req, res, next) => {
         imageUrl: true,
         muscleGroup: {
           select: {
-            name:true
-          }
-        }
+            name: true,
+          },
+        },
       },
       orderBy: [
         {
