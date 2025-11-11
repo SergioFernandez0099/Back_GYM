@@ -20,7 +20,13 @@ app.use(express.json());
 app.use(cookieParser())
 app.use(
   cors({
-      origin: ["http://localhost:5173", "http://192.168.1.153:5173", "http://172.16.0.2:5173"],
+    origin: [
+      "http://localhost:5173",
+      "http://192.168.1.153:5173",
+      "http://172.16.0.2:5173",
+      "http://172.17.96.1:5173",
+      "http://10.58.40.20:5173",
+    ],
     //  origin: true, // permite cualquier origen
     credentials: true, // permite enviar cookies
   })
