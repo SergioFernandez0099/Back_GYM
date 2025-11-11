@@ -1,6 +1,6 @@
 import prisma from "../prisma/client.js";
 import bcrypt from "bcrypt";
-import { generateToken } from "../auth/jwt.js"; // tu módulo profesional de JWT
+import {generateToken, verifyToken} from "../auth/jwt.js"; // tu módulo profesional de JWT
 
 export const loginUser = async (req, res, next) => {
   try {
@@ -55,4 +55,36 @@ export const loginUser = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+export const logout = async (req, res, next) => {
+    try {
+        // ✅ Borrar la cookie del token
+        res.clearCookie("token", {
+            httpOnly: true,
+            secure: false, // true en producción con HTTPS
+            sameSite: "lax",
+        });
+
+        res.status(200).json({ message: "Sesión cerrada correctamente" });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const validateToken = async (req, res, next) => {
+    try {
+        const token = req.cookies.token;
+        if (!token) {
+            return res.status(401).json({ message: "No token" });
+        }
+
+         res.set("Cache-Control", "no-store");
+        // Usando tu módulo JWT
+        const decoded = verifyToken(token); // función de tu módulo auth/jwt.js
+        if (!decoded) return res.status(401).json({ message: "Token inválido" });
+        res.status(200).json({ userId: decoded.userId, name: decoded.name });
+    } catch (err) {
+        res.status(401).json({ message: "Token inválido" });
+    }
 };
