@@ -313,3 +313,155 @@ export const deleteUserRoutineSet = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getUserTrainingSessions = async (req, res, next) => {
+    try {
+        const userId = Number(req.params.id);
+
+        const sessions = await prisma.trainingSession.findMany({
+            where: { userId },
+            select: {
+                id: true,
+                date: true,
+                routineName: true,
+                notes: true,
+            }
+        });
+
+        res.status(200).json(sessions);
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const createUserTrainingSession = async (req, res, next) => {
+    try {
+        const userId = Number(req.params.id);
+        const { routineName, notes } = req.body;
+
+        if (!routineName) {
+            throw new ErrorIncorrectParam("El campo 'routineName' es obligatorio");
+        }
+
+        const session = await prisma.trainingSession.create({
+            data: {
+                userId,
+                routineName,
+                notes: notes ?? null,
+            },
+            select: {
+                id: true,
+                date: true,
+                routineName: true,
+                notes: true,
+            },
+        });
+
+        res.status(201).json(session);
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const deleteUserTrainingSession = async (req, res, next) => {
+    try {
+        const userId = Number(req.params.id);
+        const sessionId = Number(req.params.sessionId);
+
+        const existing = await prisma.trainingSession.findFirstOrThrow({
+            where: { id: sessionId, userId },
+        });
+
+        await prisma.trainingSession.delete({ where: { id: existing.id } });
+
+        res.status(200).json({
+            message: `Sesión ${existing.id} eliminada correctamente`
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getTrainingSessionExercises = async (req, res, next) => {
+    try {
+        const userId = Number(req.params.id);
+        const sessionId = Number(req.params.sessionId);
+
+        const exercises = await prisma.trainingSessionExercise.findMany({
+            where: {
+                sessionId,
+                session: { userId },
+            },
+            include: {
+                exercise: true,
+                repetitions: true,
+            },
+        });
+
+        res.status(200).json(exercises);
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const createTrainingSessionExercise = async (req, res, next) => {
+    try {
+        const userId = Number(req.params.id);
+        const sessionId = Number(req.params.sessionId);
+        const { exerciseId, seriesNumber } = req.body;
+
+        if (!exerciseId || !seriesNumber) {
+            throw new ErrorIncorrectParam("Faltan parámetros obligatorios");
+        }
+
+        const session = await prisma.trainingSession.findFirstOrThrow({
+            where: { id: sessionId, userId },
+        });
+
+        const newExercise = await prisma.trainingSessionExercise.create({
+            data: {
+                sessionId: session.id,
+                exerciseId,
+                seriesNumber,
+            },
+            include: {
+                exercise: true,
+            },
+        });
+
+        res.status(201).json(newExercise);
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const createRepetition = async (req, res, next) => {
+    try {
+        const userId = Number(req.params.id);
+        const sessionId = Number(req.params.sessionId);
+        const exerciseInSessionId = Number(req.params.exerciseInSessionId);
+        const { weight, completed, notes } = req.body;
+
+        const exerciseInSession = await prisma.trainingSessionExercise.findFirstOrThrow({
+            where: {
+                id: exerciseInSessionId,
+                session: { id: sessionId, userId },
+            },
+        });
+
+        const rep = await prisma.repetition.create({
+            data: {
+                trainingSessionExerciseId: exerciseInSession.id,
+                weight: weight ?? null,
+                completed,
+                notes: notes ?? null,
+            },
+        });
+
+        res.status(201).json(rep);
+    } catch (error) {
+        next(error);
+    }
+};
+
+
