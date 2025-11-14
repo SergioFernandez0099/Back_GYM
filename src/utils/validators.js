@@ -1,4 +1,5 @@
 import { param, validationResult } from "express-validator";
+import {ErrorIncorrectParam} from "../errors/businessErrors.js";
 
 export function isNonEmptyString(value) {
   return typeof value === "string" && value.trim().length > 0;
