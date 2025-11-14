@@ -11,7 +11,7 @@ import {
     getUser,
     getUserRoutines,
     getUserRoutineSets,
-    getUsers, getUserTrainingSessions,
+    getUsers, getUserTrainingSession, getUserTrainingSessions,
     updateUser,
     updateUserRoutine,
     updateUserRoutineSet,
@@ -83,6 +83,7 @@ router.delete(
 
 // SESIONES DE ENTRENAMIENTO
 router.get("/:id/sessions", authenticate, validateId, getUserTrainingSessions);
+router.get("/:id/sessions/:sessionId", authenticate, validateId, getUserTrainingSession);
 router.post("/:id/sessions", authenticate, validateId, validateBody, createUserTrainingSession);
 router.delete("/:id/sessions/:sessionId", authenticate, validateId, deleteUserTrainingSession);
 
