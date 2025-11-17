@@ -28,7 +28,8 @@ app.use(
             "http://172.17.96.1:5173",
             "http://10.58.40.20:5173",
             "http://10.58.40.48:5173",
-            "http://10.58.41.11:5173"
+            "http://10.58.41.11:5173",
+            "http://10.58.42.90:5173"
         ],
         //  origin: true, // permite cualquier origen
         credentials: true, // permite enviar cookies
