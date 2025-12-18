@@ -4,7 +4,6 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -16,106 +15,109 @@ generator client {
 
 // ------------------- Usuarios -------------------
 model User {
-  id           Int                @id @default(autoincrement())
-  name         String             @unique
-  pin          String
-  createdAt    DateTime           @default(now())
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  pin       String
+  createdAt DateTime @default(now())
 
-  routines     Routine[]
-  sessions     TrainingSession[]
+  routines Routine[]
+  sessions TrainingSession[]
 }
 
 // ------------------- Ejercicios -------------------
 model Exercise {
-  id          Int                       @id @default(autoincrement())
-  name        String
-  imageUrl    String?
-  sets        RoutineSet[]              @relation("ExerciseToRoutineSet")
-  logs        TrainingSessionExercise[]
+  id            Int                       @id @default(autoincrement())
+  name          String
+  imageUrl      String?
+  sets          RoutineSet[]              @relation("ExerciseToRoutineSet")
+  logs          TrainingSessionExercise[]
   muscleGroupId Int?
-  muscleGroup  MuscleGroup?              @relation(fields: [muscleGroupId], references: [id])
+  muscleGroup   MuscleGroup?              @relation(fields: [muscleGroupId], references: [id])
 }
 
 // ------------------- Grupos musculares -------------------
 model MuscleGroup {
-  id        Int         @id @default(autoincrement())
-  name      String      @unique
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
   exercises Exercise[]
 }
 
 // ------------------- Rutinas -------------------
 model Routine {
-  id          Int           @id @default(autoincrement())
-  name        String
-  createdAt   DateTime       @default(now())
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
 
-  userId      Int
-  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  sets        RoutineSet[]
+  sets RoutineSet[]
 }
 
 // ------------------- Sets de la rutina -------------------
 model RoutineSet {
-  id           Int       @id @default(autoincrement())
-  series       Int
-  repetitions  Int
-  description  String?
+  id          Int     @id @default(autoincrement())
+  series      Int
+  repetitions Int
+  description String?
 
-  routineId    Int
-  exerciseId   Int
+  routineId  Int
+  exerciseId Int
 
-  routine      Routine   @relation(fields: [routineId], references: [id], onDelete: Cascade)
-  exercise     Exercise  @relation("ExerciseToRoutineSet", fields: [exerciseId], references: [id])
+  routine  Routine  @relation(fields: [routineId], references: [id], onDelete: Cascade)
+  exercise Exercise @relation("ExerciseToRoutineSet", fields: [exerciseId], references: [id])
 }
 
 // ------------------- Unidades (kg, lb, etc.) -------------------
 model Unit {
-  id     Int      @id @default(autoincrement())
-  name   String   @unique     // Ej: "kg", "lb", "bodyweight"
-  symbol String?              // Ej: "kg", "lb"
+  id     Int     @id @default(autoincrement())
+  name   String  @unique // Ej: "kg", "lb", "bodyweight"
+  symbol String? // Ej: "kg", "lb"
 
   series Series[]
 }
 
 // ------------------- Sesiones de entrenamiento -------------------
 model TrainingSession {
-  id          Int                         @id @default(autoincrement())
-  date        DateTime                    @default(now())
+  id          Int      @id @default(autoincrement())
+  date        DateTime @default(now())
   userId      Int
-  routineName String                      // snapshot del nombre de la rutina
+  routineName String // snapshot del nombre de la rutina
   notes       String?
 
-  user        User                        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user             User                      @relation(fields: [userId], references: [id], onDelete: Cascade)
   sessionExercises TrainingSessionExercise[]
 }
 
 // ------------------- Ejercicios realizados en la sesión -------------------
 model TrainingSessionExercise {
-  id            Int        @id @default(autoincrement())
-  exerciseId    Int
-  seriesNumber  Int
-  sessionId     Int
+  id           Int @id @default(autoincrement())
+  exerciseId   Int
+  seriesNumber Int
+  sessionId    Int
+  order        Int
 
-  exercise      Exercise         @relation(fields: [exerciseId], references: [id])
-  session       TrainingSession  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  series        Series[]
+  exercise Exercise        @relation(fields: [exerciseId], references: [id])
+  session  TrainingSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  series   Series[]
+
+  @@unique([sessionId, order]) // <-- asegura que no haya dos ejercicios con el mismo order en la misma sesión
 }
 
 // ------------------- Series (reemplaza Repetition) -------------------
 model Series {
-  id            Int      @id @default(autoincrement())
+  id                Int @id @default(autoincrement())
   sessionExerciseId Int
 
-  order         Int
-  reps          Int       // Nº de repeticiones logradas
-  weight        Float?    // Carga utilizada
-  intensity     Float?    // RPE / %RM / esfuerzo percibido
+  order     Int
+  reps      Int // Nº de repeticiones logradas
+  weight    Float? // Carga utilizada
+  intensity Float? // RPE / %RM / esfuerzo percibido
 
-  unitId        Int?      // Unidad opcional (kg, lb...)
+  unitId Int? // Unidad opcional (kg, lb...)
 
   sessionExercise TrainingSessionExercise @relation(fields: [sessionExerciseId], references: [id], onDelete: Cascade)
-  unit           Unit?    @relation(fields: [unitId], references: [id])
+  unit            Unit?                   @relation(fields: [unitId], references: [id])
 
   @@unique([sessionExerciseId, order]) // <--- Esto asegura que no haya dos series con el mismo orden en el mismo ejercicio
 }

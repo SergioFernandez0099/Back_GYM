@@ -109,6 +109,7 @@ async function main() {
                     {
                         exerciseId: 1, // Press banca
                         seriesNumber: 3,
+                        order:1,
                         series: {
                             create: [
                                 { order: 1, reps: 10, weight: 50, intensity: 7, unitId: kg?.id },
@@ -119,6 +120,7 @@ async function main() {
                     {
                         exerciseId: 4, // Peso muerto
                         seriesNumber: 3,
+                        order:2,
                         series: {
                             create: [
                                 { order: 1, reps: 12, weight: null, intensity: 6, unitId: bw?.id },
