@@ -353,6 +353,7 @@ export const getUserTrainingSession = async (req, res, next) => {
                     select: {
                         id: true,
                         seriesNumber: true,
+                        order: true,
                         exercise: {
                             select: {
                                 id: true,
@@ -426,7 +427,7 @@ export const createUserTrainingSession = async (req, res, next) => {
                         exerciseId: set.exerciseId,
                         seriesNumber: set.series,
                         series: {
-                            create: Array.from({ length: set.series }).map((_, i) => ({
+                            create: Array.from({length: set.series}).map((_, i) => ({
                                 order: i + 1, // solo orden
                                 reps: 1
                             })),
@@ -436,7 +437,7 @@ export const createUserTrainingSession = async (req, res, next) => {
             },
             include: {
                 sessionExercises: {
-                    include: { series: true },
+                    include: {series: true},
                 },
             },
         });
@@ -482,7 +483,6 @@ export const getTrainingSessionExercises = async (req, res, next) => {
                 repetitions: true,
             },
         });
-
         res.status(200).json(exercises);
     } catch (error) {
         next(error);
@@ -493,28 +493,45 @@ export const createTrainingSessionExercise = async (req, res, next) => {
     try {
         const userId = Number(req.params.id);
         const sessionId = Number(req.params.sessionId);
-        const {exerciseId, seriesNumber} = req.body;
+        const {exerciseId} = req.body;
 
-        if (!exerciseId || !seriesNumber) {
+        if (!exerciseId) {
             throw new ErrorIncorrectParam("Faltan parámetros obligatorios");
         }
 
+        const DEFAULT_SERIES = 3;
+
         const session = await prisma.trainingSession.findFirstOrThrow({
             where: {id: sessionId, userId},
+        });
+
+        const existingExercisesCount = await prisma.trainingSessionExercise.count({
+            where: {sessionId: session.id},
         });
 
         const newExercise = await prisma.trainingSessionExercise.create({
             data: {
                 sessionId: session.id,
                 exerciseId,
-                seriesNumber,
+                seriesNumber: DEFAULT_SERIES,
+                order: existingExercisesCount + 1,
+                series: {
+                    create: Array.from({length: DEFAULT_SERIES}).map((_, i) => ({
+                        order: i + 1,
+                        reps: 0,
+                        weight: null,
+                        intensity: null,
+                        unitId: 1, //Kg
+                    })),
+                },
             },
             include: {
                 exercise: true,
+                series: true,
             },
         });
 
-        res.status(201).json(newExercise);
+        res.status(201).json({ok: true, id: newExercise.id});
     } catch (error) {
         next(error);
     }
