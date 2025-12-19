@@ -395,55 +395,96 @@ export const getUserTrainingSession = async (req, res, next) => {
 export const createUserTrainingSession = async (req, res, next) => {
     try {
         const userId = Number(req.params.id);
-        const {routineId, date} = req.body;
+        const { routineId } = req.body;
+        let { date } = req.body;
+        date = new Date(date);
 
-        const routine = await prisma.routine.findUnique({
+        if (isNaN(date.getTime())) {
+            throw new ErrorIncorrectParam("Fecha inválida");
+        }
+
+        // Creamos el rango del día completo
+        const startOfDay = new Date(date);
+        startOfDay.setHours(0, 0, 0, 0);
+
+        const endOfDay = new Date(date);
+        endOfDay.setHours(23, 59, 59, 999);
+
+        // Verificar si ya existe una sesión en ese día para el usuario
+        const existingSession = await prisma.trainingSession.findFirst({
             where: {
-                id: routineId,
-                userId: userId
-            },
-            include: {
-                sets: {
-                    include: {
-                        exercise: true,
-                    },
+                userId,
+                date: {
+                    gte: startOfDay,
+                    lte: endOfDay,
                 },
-                user: true,
             },
         });
 
-        if (!routine) {
-            throw new ErrorIncorrectParam("No se ha encontrado esa rutina");
+        if (existingSession) {
+            throw new ErrorIncorrectParam("Ya existe una sesión creada en esa fecha");
         }
 
-        const session = await prisma.trainingSession.create({
-            data: {
-                userId: userId,
+        let sessionData = {
+            userId: userId,
+            date: date,
+            notes: 'Sesión generada desde rutina',
+        };
+
+        if (routineId !== -1) {
+            // Buscamos la rutina solo si no es -1
+            const routine = await prisma.routine.findUnique({
+                where: {
+                    id: routineId,
+                    userId: userId
+                },
+                include: {
+                    sets: {
+                        include: {
+                            exercise: true,
+                        },
+                    },
+                    user: true,
+                },
+            });
+
+            if (!routine) {
+                throw new ErrorIncorrectParam("No se ha encontrado esa rutina");
+            }
+
+            // Añadimos los ejercicios al objeto sessionData
+            sessionData = {
+                ...sessionData,
                 routineName: routine.name,
-                date: date,
-                notes: 'Sesión generada desde rutina',
                 sessionExercises: {
                     create: routine.sets.map((set) => ({
                         exerciseId: set.exerciseId,
                         seriesNumber: set.series,
+                        order: set.order,
                         series: {
-                            create: Array.from({length: set.series}).map((_, i) => ({
-                                order: i + 1, // solo orden
+                            create: Array.from({ length: set.series }).map((_, i) => ({
+                                order: i + 1,
                                 reps: 1
                             })),
                         },
                     })),
                 },
-            },
+            };
+        } else {
+            // Si routineId === -1, podemos poner un nombre genérico
+            sessionData.routineName = 'Sesión sin rutina';
+        }
+
+        const session = await prisma.trainingSession.create({
+            data: sessionData,
             include: {
                 sessionExercises: {
-                    include: {series: true},
+                    include: { series: true },
                 },
             },
         });
-        console.log(session);
 
-        res.status(201).json(session.id);
+        res.status(201).json({ ok: true, id: session.id });
     } catch (error) {
         next(error);
     }
@@ -461,6 +502,7 @@ export const deleteUserTrainingSession = async (req, res, next) => {
         await prisma.trainingSession.delete({where: {id: existing.id}});
 
         res.status(200).json({
+            ok: true,
             message: `Sesión ${existing.id} eliminada correctamente`
         });
     } catch (error) {
@@ -536,6 +578,59 @@ export const createTrainingSessionExercise = async (req, res, next) => {
         next(error);
     }
 };
+
+export const deleteTrainingSessionExercise = async (req, res, next) => {
+    try {
+        const userId = Number(req.params.id);
+        const sessionId = Number(req.params.sessionId);
+        const exerciseInSessionId = Number(req.params.exerciseInSessionId);
+
+        // 1. Obtener el ejercicio y validar propiedad
+        const exercise = await prisma.trainingSessionExercise.findFirstOrThrow({
+            where: {
+                id: exerciseInSessionId,
+                session: {
+                    id: sessionId,
+                    userId,
+                },
+            },
+            select: {
+                id: true,
+                order: true,
+            },
+        });
+
+        const deletedOrder = exercise.order;
+
+        // 2. Borrar el ejercicio (series en cascade)
+        await prisma.trainingSessionExercise.delete({
+            where: {id: exercise.id},
+        });
+
+        // 3. Compactar el order (solo los posteriores)
+        await prisma.trainingSessionExercise.updateMany({
+            where: {
+                sessionId,
+                order: {
+                    gt: deletedOrder,
+                },
+            },
+            data: {
+                order: {
+                    decrement: 1,
+                },
+            },
+        });
+
+        res.status(200).json({
+            ok: true,
+            body: `Ejercicio eliminado correctamente`,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 
 export const createRepetition = async (req, res, next) => {
     try {

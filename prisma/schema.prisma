@@ -60,12 +60,14 @@ model RoutineSet {
   series      Int
   repetitions Int
   description String?
-
-  routineId  Int
-  exerciseId Int
+  order       Int
+  routineId   Int
+  exerciseId  Int
 
   routine  Routine  @relation(fields: [routineId], references: [id], onDelete: Cascade)
   exercise Exercise @relation("ExerciseToRoutineSet", fields: [exerciseId], references: [id])
+
+  @@unique([routineId, order])
 }
 
 // ------------------- Unidades (kg, lb, etc.) -------------------
