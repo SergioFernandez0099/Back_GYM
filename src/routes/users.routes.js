@@ -4,7 +4,7 @@ import {
     createTrainingSessionExercise,
     createUser,
     createUserRoutine,
-    createUserRoutineSet, createUserTrainingSession,
+    createUserRoutineSet, createUserTrainingSession, deleteTrainingSessionExercise,
     deleteUser,
     deleteUserRoutine,
     deleteUserRoutineSet, deleteUserTrainingSession, getTrainingSessionExercises,
@@ -90,6 +90,7 @@ router.delete("/:id/sessions/:sessionId", authenticate, validateId, deleteUserTr
 // EJERCICIOS DE UNA SESIÓN
 router.get("/:id/sessions/:sessionId/exercises", authenticate, validateId, getTrainingSessionExercises);
 router.post("/:id/sessions/:sessionId/exercises", authenticate, validateId, validateBody, createTrainingSessionExercise);
+router.delete("/:id/sessions/:sessionId/exercises/:exerciseInSessionId", authenticate, validateId, deleteTrainingSessionExercise);
 
 // REPETICIONES DE UN EJERCICIO EN SESIÓN
 router.post("/:id/sessions/:sessionId/exercises/:exerciseInSessionId/repetitions",
