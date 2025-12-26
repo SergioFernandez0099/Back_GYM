@@ -1,17 +1,26 @@
 import {Router} from "express";
 import {
-    createRepetition,
     createTrainingSessionExercise,
+    createTrainingSessionSerie,
     createUser,
     createUserRoutine,
-    createUserRoutineSet, createUserTrainingSession, deleteTrainingSessionExercise,
+    createUserRoutineSet,
+    createUserTrainingSession,
+    deleteTrainingSessionExercise,
+    deleteTrainingSessionSerie,
     deleteUser,
     deleteUserRoutine,
-    deleteUserRoutineSet, deleteUserTrainingSession, getTrainingSessionExercises,
+    deleteUserRoutineSet,
+    deleteUserTrainingSession,
+    getTrainingSessionExercises,
     getUser,
     getUserRoutines,
     getUserRoutineSets,
-    getUsers, getUserTrainingSession, getUserTrainingSessions,
+    getUsers,
+    getUserTrainingSession,
+    getUserTrainingSessions,
+    updateTrainingSessionExerciseOrder,
+    updateTrainingSessionSeries,
     updateUser,
     updateUserRoutine,
     updateUserRoutineSet,
@@ -93,11 +102,30 @@ router.post("/:id/sessions/:sessionId/exercises", authenticate, validateId, vali
 router.delete("/:id/sessions/:sessionId/exercises/:exerciseInSessionId", authenticate, validateId, deleteTrainingSessionExercise);
 
 // REPETICIONES DE UN EJERCICIO EN SESIÓN
-router.post("/:id/sessions/:sessionId/exercises/:exerciseInSessionId/repetitions",
+router.post("/:id/sessions/:sessionId/exercises/:exerciseInSessionId/series",
+    authenticate,
+    validateId,
+    createTrainingSessionSerie
+);
+router.patch(
+    "/:id/sessions/:sessionId/exercises/:exerciseInSessionId/series",
     authenticate,
     validateId,
     validateBody,
-    createRepetition
+    updateTrainingSessionSeries
 );
+router.delete("/:id/sessions/:sessionId/exercises/:exerciseInSessionId/series/:serieId",
+    authenticate,
+    validateId,
+    deleteTrainingSessionSerie
+);
+router.patch(
+    "/:id/sessions/:sessionId/exercises/order",
+    authenticate,
+    validateId,
+    validateBody,
+    updateTrainingSessionExerciseOrder
+);
+
 
 export default router;

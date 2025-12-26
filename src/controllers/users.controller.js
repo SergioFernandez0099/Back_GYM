@@ -367,6 +367,7 @@ export const getUserTrainingSession = async (req, res, next) => {
                                 order: true,
                                 reps: true,
                                 weight: true,
+                                rir: true,
                                 intensity: true,
                                 unit: {
                                     select: {
@@ -395,8 +396,8 @@ export const getUserTrainingSession = async (req, res, next) => {
 export const createUserTrainingSession = async (req, res, next) => {
     try {
         const userId = Number(req.params.id);
-        const { routineId } = req.body;
-        let { date } = req.body;
+        const {routineId} = req.body;
+        let {date} = req.body;
         date = new Date(date);
 
         if (isNaN(date.getTime())) {
@@ -462,7 +463,7 @@ export const createUserTrainingSession = async (req, res, next) => {
                         seriesNumber: set.series,
                         order: set.order,
                         series: {
-                            create: Array.from({ length: set.series }).map((_, i) => ({
+                            create: Array.from({length: set.series}).map((_, i) => ({
                                 order: i + 1,
                                 reps: 1
                             })),
@@ -479,12 +480,12 @@ export const createUserTrainingSession = async (req, res, next) => {
             data: sessionData,
             include: {
                 sessionExercises: {
-                    include: { series: true },
+                    include: {series: true},
                 },
             },
         });
 
-        res.status(201).json({ ok: true, id: session.id });
+        res.status(201).json({ok: true, id: session.id});
     } catch (error) {
         next(error);
     }
@@ -563,6 +564,7 @@ export const createTrainingSessionExercise = async (req, res, next) => {
                         reps: 0,
                         weight: null,
                         intensity: null,
+                        rir: null,
                         unitId: 1, //Kg
                     })),
                 },
@@ -574,6 +576,60 @@ export const createTrainingSessionExercise = async (req, res, next) => {
         });
 
         res.status(201).json({ok: true, id: newExercise.id});
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const createTrainingSessionSerie = async (req, res, next) => {
+    try {
+        const userId = Number(req.params.id);
+        const sessionId = Number(req.params.sessionId);
+        const exerciseInSessionId = Number(req.params.exerciseInSessionId);
+
+        // 1. Validar que el ejercicio pertenece a la sesión y al usuario
+        const sessionExercise = await prisma.trainingSessionExercise.findFirstOrThrow({
+            where: {
+                id: exerciseInSessionId,
+                session: {
+                    id: sessionId,
+                    userId,
+                },
+            },
+            select: {
+                id: true,
+            },
+        });
+
+        // 2. Obtener el último order de las series
+        const lastSerie = await prisma.series.findFirst({
+            where: {
+                sessionExerciseId: sessionExercise.id,
+            },
+            orderBy: {
+                order: "desc",
+            },
+            select: {
+                order: true,
+            },
+        });
+
+        const nextOrder = lastSerie ? lastSerie.order + 1 : 1;
+
+        // 3. Crear la serie
+        const newSerie = await prisma.series.create({
+            data: {
+                sessionExerciseId: sessionExercise.id,
+                order: nextOrder,
+                reps: 0,
+                unitId: 1, //Kg
+            },
+        });
+
+        res.status(201).json({
+            ok: true,
+            body: newSerie.id,
+        });
     } catch (error) {
         next(error);
     }
@@ -631,34 +687,166 @@ export const deleteTrainingSessionExercise = async (req, res, next) => {
     }
 };
 
-
-export const createRepetition = async (req, res, next) => {
+export const updateTrainingSessionSeries = async (req, res, next) => {
     try {
         const userId = Number(req.params.id);
         const sessionId = Number(req.params.sessionId);
         const exerciseInSessionId = Number(req.params.exerciseInSessionId);
-        const {weight, completed, notes} = req.body;
 
-        const exerciseInSession = await prisma.trainingSessionExercise.findFirstOrThrow({
+        const {series} = req.body;
+
+        if (!Array.isArray(series) || series.length === 0) {
+            return res.status(400).json({
+                ok: false,
+                message: "No hay series para actualizar",
+            });
+        }
+
+        // 1. Validar que el ejercicio pertenece al usuario
+        await prisma.trainingSessionExercise.findFirstOrThrow({
             where: {
                 id: exerciseInSessionId,
-                session: {id: sessionId, userId},
+                session: {
+                    id: sessionId,
+                    userId,
+                },
             },
+            select: {id: true},
         });
 
-        const rep = await prisma.repetition.create({
-            data: {
-                trainingSessionExerciseId: exerciseInSession.id,
-                weight: weight ?? null,
-                completed,
-                notes: notes ?? null,
-            },
-        });
+        // 2. Transacción con PATCH real
+        await prisma.$transaction(
+            series.map((serie) => {
+                const data = {};
 
-        res.status(201).json(rep);
+                if ("reps" in serie) data.reps = serie.reps;
+                if ("weight" in serie) data.weight = serie.weight;
+                if ("intensity" in serie) data.intensity = serie.intensity;
+                if ("rir" in serie) data.rir = serie.rir;
+                if ("unitId" in serie) data.unitId = serie.unitId;
+
+                if (Object.keys(data).length === 0) {
+                    // No hay nada que actualizar → evita update vacío
+                    return Promise.resolve();
+                }
+
+                return prisma.series.update({
+                    where: {
+                        id: serie.id,
+                        sessionExerciseId: exerciseInSessionId,
+                    },
+                    data,
+                });
+            })
+        );
+
+        res.status(200).json({
+            ok: true,
+            body: "Series actualizadas correctamente",
+        });
     } catch (error) {
         next(error);
     }
 };
 
+export const deleteTrainingSessionSerie = async (req, res, next) => {
+    try {
+        const userId = Number(req.params.id);
+        const sessionId = Number(req.params.sessionId);
+        const exerciseInSessionId = Number(req.params.exerciseInSessionId);
+        const serieId = Number(req.params.serieId);
+
+        // 1. Obtener la serie y validar propiedad
+        const serie = await prisma.series.findFirstOrThrow({
+            where: {
+                id: serieId,
+                sessionExercise: {
+                    id: exerciseInSessionId,
+                    session: {
+                        id: sessionId,
+                        userId,
+                    },
+                },
+            },
+            select: {
+                id: true,
+                order: true,
+                sessionExerciseId: true,
+            },
+        });
+
+        const deletedOrder = serie.order;
+
+        // 2. Borrar la serie
+        await prisma.series.delete({
+            where: {id: serie.id},
+        });
+
+        // 3. Compactar el order de las series posteriores
+        await prisma.series.updateMany({
+            where: {
+                sessionExerciseId: serie.sessionExerciseId,
+                order: {
+                    gt: deletedOrder,
+                },
+            },
+            data: {
+                order: {
+                    decrement: 1,
+                },
+            },
+        });
+
+        res.status(200).json({
+            ok: true,
+            body: "Serie eliminada correctamente",
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const updateTrainingSessionExerciseOrder = async (req, res, next) => {
+    const sessionId = Number(req.params.sessionId);
+    const orderedExerciseIds = req.body;
+
+    if (!Array.isArray(orderedExerciseIds)) {
+        return res.status(400).json({
+            error: "orderedExerciseIds debe ser un array"
+        });
+    }
+
+    try {
+        await prisma.$transaction(async (tx) => {
+
+            // 1️⃣ Desplazar todos los orders a una zona segura (1000+)
+            await tx.trainingSessionExercise.updateMany({
+                where: { sessionId },
+                data: {
+                    order: { increment: 1000 }
+                }
+            });
+
+            // 2️⃣ Aplicar el orden definitivo
+            for (let i = 0; i < orderedExerciseIds.length; i++) {
+                await tx.trainingSessionExercise.update({
+                    where: {
+                        id: orderedExerciseIds[i],
+                        sessionId
+                    },
+                    data: {
+                        order: i + 1
+                    }
+                });
+            }
+        });
+
+        console.log("actualizado correctamente")
+
+        res.status(200).send({ok: true});
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+};
 
