@@ -114,7 +114,8 @@ model Series {
   order     Int
   reps      Int // Nº de repeticiones logradas
   weight    Float? // Carga utilizada
-  intensity Float? // RPE / %RM / esfuerzo percibido
+  intensity Int? // RPE / %RM / esfuerzo percibido
+  rir       Int?
 
   unitId Int? // Unidad opcional (kg, lb...)
 
