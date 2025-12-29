@@ -52,5 +52,6 @@ export function errorHandler(err, req, res, next) {
   // Error genérico
   const mensaje = err.message || "Error interno";
   const estado = err.statusCode || 500;
-  return respuesta.error(req, res, mensaje, estado);
+  console.log(mensaje);
+  return respuesta.error(res, mensaje, estado);
 }

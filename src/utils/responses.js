@@ -1,4 +1,5 @@
 const respuesta = {
+  // Códigos HTTP
   HTTP_OK: 200,
   HTTP_CREATED: 201,
   HTTP_NO_CONTENT: 204,
@@ -9,8 +10,20 @@ const respuesta = {
   HTTP_NOT_FOUND: 404,
   HTTP_INTERNAL_SERVER_ERROR: 500,
 
-  error: function (req, res, mensaje, estado = 500) {
-    return res.status(estado).json({ error: mensaje });
+  // Respuesta de error estandarizada
+  error: function (res, mensaje, estado = 500) {
+    return res.status(estado).json({
+      success: false,
+      message: mensaje,
+    });
+  },
+
+  // Respuesta exitosa estandarizada
+  success: function (res, mensaje = "OK", estado = 200) {
+    return res.status(estado).json({
+      success: true,
+      message: mensaje,
+    });
   },
 };
 

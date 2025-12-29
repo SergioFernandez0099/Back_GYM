@@ -2,13 +2,14 @@ import {ErrorIncorrectParam} from "../errors/businessErrors.js";
 import bcrypt from "bcrypt";
 import {configApp} from "../config/config.js";
 import prisma from "../prisma/client.js";
+import respuesta from "../utils/responses.js";
 
 export const getUsers = async (req, res, next) => {
     try {
         const users = await prisma.user.findMany({
             select: {id: true, name: true},
         });
-        res.status(200).json(users);
+        respuesta.success(res, users);
     } catch (error) {
         next(error);
     }
@@ -21,7 +22,7 @@ export const getUser = async (req, res, next) => {
             where: {id: Number(id)},
             select: {id: true, name: true},
         });
-        res.status(200).json(users);
+        respuesta.success(res, users);
     } catch (error) {
         next(error);
     }
@@ -35,7 +36,7 @@ export const createUser = async (req, res, next) => {
             data: {name: name, pin: hashedPin},
             select: {id: true, name: true},
         });
-        res.status(201).json(newUser);
+        respuesta.success(res, newUser, 201);
     } catch (error) {
         next(error);
     }
@@ -65,11 +66,13 @@ export const updateUser = async (req, res, next) => {
             select: {id: true, name: true},
         });
 
-        res.status(200).json({
-            message: `Usuario con id ${updatedUser.id} actualizado correctamente`,
-            user: updatedUser,
-            pinUpdated: pin !== undefined,
-        });
+        respuesta.success(res, updatedUser);
+
+        // res.status(200).json({
+        //     message: `Usuario con id ${updatedUser.id} actualizado correctamente`,
+        //     user: updatedUser,
+        //     pinUpdated: pin !== undefined,
+        // });
     } catch (error) {
         next(error);
     }
@@ -81,9 +84,10 @@ export const deleteUser = async (req, res, next) => {
         const deletedUser = await prisma.user.delete({
             where: {id: id},
         });
-        res.status(200).json({
-            message: `Usuario con id ${deletedUser.id} borrado correctamente`,
-        });
+        // res.status(200).json({
+        //     message: `Usuario con id ${deletedUser.id} borrado correctamente`,
+        // });
+        respuesta.success(res, `Usuario con id ${deletedUser.id} borrado correctamente`);
     } catch (error) {
         next(error);
     }
@@ -101,7 +105,7 @@ export const getUserRoutines = async (req, res, next) => {
             },
         });
 
-        res.status(200).json(routines);
+        respuesta.success(res, routines);
     } catch (error) {
         next(error);
     }
@@ -124,7 +128,7 @@ export const createUserRoutine = async (req, res, next) => {
             select: {id: true, name: true},
         });
 
-        res.status(201).json(newRoutine);
+        respuesta.success(res, newRoutine, 201);
     } catch (error) {
         next(error);
     }
@@ -155,10 +159,12 @@ export const updateUserRoutine = async (req, res, next) => {
             select: {id: true, name: true},
         });
 
-        res.status(200).json({
-            message: `Rutina con id ${updatedRoutine.id} actualizada correctamente`,
-            routine: updatedRoutine,
-        });
+        respuesta.success(res, updatedRoutine);
+
+        // res.status(200).json({
+        //     message: `Rutina con id ${updatedRoutine.id} actualizada correctamente`,
+        //     routine: updatedRoutine,
+        // });
     } catch (error) {
         next(error);
     }
@@ -176,9 +182,7 @@ export const deleteUserRoutine = async (req, res, next) => {
 
         await prisma.routine.delete({where: {id: routine.id}});
 
-        res.status(200).json({
-            message: `Rutina con id ${routine.id} eliminada correctamente`,
-        });
+        respuesta.success(res, `Rutina con id ${routine.id} eliminada correctamente`);
     } catch (error) {
         next(error);
     }
@@ -201,7 +205,7 @@ export const getUserRoutineSets = async (req, res, next) => {
             },
         });
 
-        res.status(200).json(sets);
+        respuesta.success(res, sets);
     } catch (error) {
         next(error);
     }
@@ -233,7 +237,7 @@ export const createUserRoutineSet = async (req, res, next) => {
             include: {exercise: true},
         });
 
-        res.status(201).json(newSet);
+        respuesta.success(res, newSet, 201);
     } catch (error) {
         next(error);
     }
@@ -279,10 +283,11 @@ export const updateUserRoutineSet = async (req, res, next) => {
             include: {exercise: true},
         });
 
-        res.status(200).json({
-            message: `Set con id ${updatedSet.id} actualizado correctamente`,
-            set: updatedSet,
-        });
+        // res.status(200).json({
+        //     message: `Set con id ${updatedSet.id} actualizado correctamente`,
+        //     set: updatedSet,
+        // });
+        respuesta.success(res, updatedSet);
     } catch (error) {
         next(error);
     }
@@ -306,9 +311,10 @@ export const deleteUserRoutineSet = async (req, res, next) => {
 
         await prisma.routineSet.delete({where: {id: existing.id}});
 
-        res.status(200).json({
-            message: `Set con id ${existing.id} eliminado correctamente`,
-        });
+        // res.status(200).json({
+        //     message: `Set con id ${existing.id} eliminado correctamente`,
+        // });
+        respuesta.success(res, `Set con id ${existing.id} eliminado correctamente`);
     } catch (error) {
         next(error);
     }
@@ -328,7 +334,7 @@ export const getUserTrainingSessions = async (req, res, next) => {
             }
         });
 
-        res.status(200).json(sessions);
+        respuesta.success(res, sessions);
     } catch (error) {
         next(error);
     }
@@ -386,7 +392,7 @@ export const getUserTrainingSession = async (req, res, next) => {
             }
         });
 
-        res.status(200).json(session);
+        respuesta.success(res, session);
     } catch (error) {
         next(error);
     }
@@ -485,7 +491,8 @@ export const createUserTrainingSession = async (req, res, next) => {
             },
         });
 
-        res.status(201).json({ok: true, id: session.id});
+        // res.status(201).json({ok: true, id: session.id});
+        respuesta.success(res, {id: session.id});
     } catch (error) {
         next(error);
     }
@@ -526,7 +533,7 @@ export const getTrainingSessionExercises = async (req, res, next) => {
                 repetitions: true,
             },
         });
-        res.status(200).json(exercises);
+        respuesta.success(res, exercises);
     } catch (error) {
         next(error);
     }
@@ -575,7 +582,8 @@ export const createTrainingSessionExercise = async (req, res, next) => {
             },
         });
 
-        res.status(201).json({ok: true, id: newExercise.id});
+        // res.status(201).json({ok: true, id: newExercise.id});
+        respuesta.success(res, {id: newExercise.id}, 201);
     } catch (error) {
         next(error);
     }
@@ -626,10 +634,12 @@ export const createTrainingSessionSerie = async (req, res, next) => {
             },
         });
 
-        res.status(201).json({
-            ok: true,
-            body: newSerie.id,
-        });
+        // res.status(201).json({
+        //     ok: true,
+        //     body: newSerie.id,
+        // });
+        respuesta.success(res, {id: newSerie.id}, 201);
+
     } catch (error) {
         next(error);
     }
@@ -678,10 +688,11 @@ export const deleteTrainingSessionExercise = async (req, res, next) => {
             },
         });
 
-        res.status(200).json({
-            ok: true,
-            body: `Ejercicio eliminado correctamente`,
-        });
+        // res.status(200).json({
+        //     ok: true,
+        //     body: `Ejercicio eliminado correctamente`,
+        // });
+        respuesta.success(res, `Ejercicio eliminado correctamente`);
     } catch (error) {
         next(error);
     }
@@ -740,10 +751,11 @@ export const updateTrainingSessionSeries = async (req, res, next) => {
             })
         );
 
-        res.status(200).json({
-            ok: true,
-            body: "Series actualizadas correctamente",
-        });
+        // res.status(200).json({
+        //     ok: true,
+        //     body: "Series actualizadas correctamente",
+        // });
+        respuesta.success(res, `Series actualizadas correctamente`);
     } catch (error) {
         next(error);
     }
@@ -797,10 +809,11 @@ export const deleteTrainingSessionSerie = async (req, res, next) => {
             },
         });
 
-        res.status(200).json({
-            ok: true,
-            body: "Serie eliminada correctamente",
-        });
+        // res.status(200).json({
+        //     ok: true,
+        //     body: "Serie eliminada correctamente",
+        // });
+        respuesta.success(res, `Serie eliminada correctamente`);
     } catch (error) {
         next(error);
     }
@@ -821,9 +834,9 @@ export const updateTrainingSessionExerciseOrder = async (req, res, next) => {
 
             // 1️⃣ Desplazar todos los orders a una zona segura (1000+)
             await tx.trainingSessionExercise.updateMany({
-                where: { sessionId },
+                where: {sessionId},
                 data: {
-                    order: { increment: 1000 }
+                    order: {increment: 1000}
                 }
             });
 
@@ -843,7 +856,9 @@ export const updateTrainingSessionExerciseOrder = async (req, res, next) => {
 
         console.log("actualizado correctamente")
 
-        res.status(200).send({ok: true});
+        // res.status(200).send({ok: true});
+        respuesta.success(res, `Orden actualizado correctamente`);
+
     } catch (error) {
         console.error(error);
         next(error);
