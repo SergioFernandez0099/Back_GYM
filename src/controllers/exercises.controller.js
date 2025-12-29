@@ -1,32 +1,33 @@
 import prisma from "../prisma/client.js";
+import respuesta from "../utils/responses.js";
 
 export const getExercises = async (req, res, next) => {
-  try {
-    const exercises = await prisma.exercise.findMany({
-      select: {
-        id: true,
-        name: true,
-        imageUrl: true,
-        muscleGroup: {
-          select: {
-            name: true,
-          },
-        },
-      },
-      orderBy: [
-        {
-          muscleGroup: {
-            name: "asc",
-          },
-        },
-        {
-          name: "asc",
-        },
-      ],
-    });
+    try {
+        const exercises = await prisma.exercise.findMany({
+            select: {
+                id: true,
+                name: true,
+                imageUrl: true,
+                muscleGroup: {
+                    select: {
+                        name: true,
+                    },
+                },
+            },
+            orderBy: [
+                {
+                    muscleGroup: {
+                        name: "asc",
+                    },
+                },
+                {
+                    name: "asc",
+                },
+            ],
+        });
 
-    res.status(200).json(exercises);
-  } catch (error) {
-    next(error);
-  }
+        respuesta.success(res, exercises);
+    } catch (error) {
+        next(error);
+    }
 };
