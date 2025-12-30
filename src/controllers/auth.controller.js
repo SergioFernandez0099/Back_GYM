@@ -46,7 +46,6 @@ export const loginUser = async (req, res, next) => {
 
         // ✅ Devolver solo info segura del usuario
         respuesta.success(res, {
-            message: "Autenticación correcta",
             user: {
                 id: user.id,
                 name: user.name,

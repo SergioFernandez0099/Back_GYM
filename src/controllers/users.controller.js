@@ -215,26 +215,37 @@ export const createUserRoutineSet = async (req, res, next) => {
     try {
         const userId = Number(req.params.id);
         const routineId = Number(req.params.routineId);
-        const {exerciseId, series, repetitions, description} = req.body;
+        const { exerciseId, series, repetitions, description } = req.body;
 
         if (!exerciseId || !series || !repetitions) {
             throw new ErrorIncorrectParam("Faltan parámetros obligatorios");
         }
 
-        // Verificamos que la rutina pertenece al usuario
         const routine = await prisma.routine.findFirstOrThrow({
-            where: {id: routineId, userId},
+            where: { id: routineId, userId },
         });
 
-        const newSet = await prisma.routineSet.create({
-            data: {
-                routineId: routine.id,
-                exerciseId,
-                series,
-                repetitions,
-                description,
-            },
-            include: {exercise: true},
+        const newSet = await prisma.$transaction(async (tx) => {
+
+            const lastSet = await tx.routineSet.findFirst({
+                where: { routineId: routine.id },
+                orderBy: { order: 'desc' },
+                select: { order: true },
+            });
+
+            const newOrder = lastSet ? lastSet.order + 1 : 1;
+
+            return tx.routineSet.create({
+                data: {
+                    routineId: routine.id,
+                    exerciseId,
+                    series,
+                    repetitions,
+                    description,
+                    order: newOrder,
+                },
+                include: { exercise: true },
+            });
         });
 
         respuesta.success(res, newSet, 201);
@@ -242,6 +253,7 @@ export const createUserRoutineSet = async (req, res, next) => {
         next(error);
     }
 };
+
 
 export const updateUserRoutineSet = async (req, res, next) => {
     try {
