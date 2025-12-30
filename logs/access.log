@@ -6357,3 +6357,167 @@
 2025-12-29T01:59:17.940Z 192.168.0.153 - GET /api/users/1/routines 200 95 - 3.606 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
 2025-12-29T01:59:21.387Z 192.168.0.153 - GET /api/users/1/sessions/1 200 1015 - 15.859 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
 2025-12-29T01:59:21.402Z 192.168.0.153 - GET /api/exercises 304 - - 6.242 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T02:02:04.200Z 192.168.0.153 - GET /api/muscleGroups 304 - - 3.540 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T02:02:04.216Z 192.168.0.153 - GET /api/exercises 304 - - 3.870 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T02:02:06.285Z 192.168.0.153 - GET /api/users/1/routines 304 - - 2.905 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T22:52:57.686Z 192.168.0.153 - GET /api/auth/validate 200 28 - 6.730 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T22:52:59.755Z 192.168.0.153 - GET /api/users/1/sessions 304 - - 138.610 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T22:52:59.764Z 192.168.0.153 - GET /api/users/1/routines 304 - - 4.797 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T22:53:01.681Z 192.168.0.153 - GET /api/users/1/routines 304 - - 2.144 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T22:53:03.220Z 192.168.0.153 - GET /api/users/1/routines/1/sets 200 892 - 20.791 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T22:53:15.077Z 192.168.0.153 - GET /api/exercises 304 - - 12.989 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T22:53:58.078Z 192.168.0.153 - POST /api/users/1/routines/1/sets 500 1529 - 11.256 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T22:54:07.082Z 192.168.0.153 - POST /api/users/1/routines/1/sets 500 1529 - 5.121 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T22:54:30.187Z 192.168.0.153 - GET /api/users/1/routines/1/sets 304 - - 3.785 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T22:59:21.898Z 192.168.0.153 - GET /api/exercises 304 - - 57.162 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T22:59:31.826Z 192.168.0.153 - POST /api/users/1/routines/1/sets 201 243 - 29.380 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:00:08.265Z 192.168.0.153 - DELETE /api/users/1/routines/1/sets/3 200 65 - 9.720 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:00:17.640Z 192.168.0.153 - GET /api/users/1/routines/1/sets 200 892 - 3.122 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:01:01.942Z 192.168.0.153 - GET /api/auth/validate 200 28 - 1.778 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:01:02.066Z 192.168.0.153 - GET /api/users/1/routines/1/sets 304 - - 4.067 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:01:06.148Z 192.168.0.153 - DELETE /api/users/1/routines/1/sets/2 200 65 - 4.098 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:01:32.303Z 192.168.0.153 - PUT /api/users/1/routines/1/sets/9 200 244 - 7.489 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:02:42.087Z 192.168.0.153 - GET /api/users/1/routines/1/sets 200 678 - 3.888 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:02:44.371Z 192.168.0.153 - GET /api/users/1/routines 304 - - 4.685 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:02:56.226Z 192.168.0.153 - POST /api/users/1/routines 201 52 - 7.203 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:03:26.730Z 192.168.0.153 - POST /api/users/1/routines 201 46 - 3.138 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:03:35.549Z 192.168.0.153 - GET /api/users/1/routines 200 141 - 2.007 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:04:32.145Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.643 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:04:32.275Z 192.168.0.153 - GET /api/users/1/routines 304 - - 50.605 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:04:36.222Z 192.168.0.153 - DELETE /api/users/1/routines/3 200 68 - 6.883 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:04:38.883Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.773 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:04:38.913Z 192.168.0.153 - GET /api/users/1/routines 200 115 - 1.948 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:04:44.040Z 192.168.0.153 - PUT /api/users/1/routines/4 200 46 - 3.204 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:04:47.063Z 192.168.0.153 - DELETE /api/users/1/routines/4 200 68 - 3.312 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:04:53.094Z 192.168.0.153 - GET /api/users/1/routines 200 95 - 1.828 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:05:31.457Z 192.168.0.153 - GET /api/auth/validate 200 28 - 1.063 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:05:31.491Z 192.168.0.153 - GET /api/users/1/routines 304 - - 2.799 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:05:51.692Z 192.168.0.153 - POST /api/users/1/routines 201 52 - 5.706 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:05:54.323Z 192.168.0.153 - GET /api/users/1/routines/NaN/sets 500 1529 - 11.537 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:05:58.068Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.628 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:05:58.866Z 192.168.0.153 - GET /api/users/1/routines/NaN/sets 500 1529 - 3.286 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:05:59.808Z 192.168.0.153 - GET /api/users/1/routines/NaN/sets 500 1529 - 2.822 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:06:01.897Z 192.168.0.153 - GET /api/users/1/routines/NaN/sets 500 1529 - 2.779 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:06:02.484Z 192.168.0.153 - GET /api/users/1/routines/NaN/sets 500 1529 - 2.505 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:06:06.806Z 192.168.0.153 - GET /api/muscleGroups 304 - - 5.001 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:06:06.817Z 192.168.0.153 - GET /api/exercises 304 - - 5.128 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:06:11.186Z 192.168.0.153 - GET /api/users/1/routines 200 121 - 2.127 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:06:21.364Z 192.168.0.153 - PUT /api/users/1/routines/5 200 52 - 2.515 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:06:30.196Z 192.168.0.153 - POST /api/users/1/routines 201 52 - 3.870 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:11:29.894Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.681 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:11:30.054Z 192.168.0.153 - GET /api/users/1/routines 200 147 - 57.250 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:11:37.945Z 192.168.0.153 - POST /api/users/1/routines 201 51 - 6.900 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:11:47.584Z 192.168.0.153 - GET /api/users/1/routines 200 172 - 1.588 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:12:46.027Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.465 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:12:46.055Z 192.168.0.153 - GET /api/users/1/routines 304 - - 2.270 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:12:57.672Z 192.168.0.153 - POST /api/users/1/routines 201 54 - 2.684 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:13:32.016Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.606 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:13:32.170Z 192.168.0.153 - GET /api/users/1/routines 200 200 - 2.878 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:13:38.419Z 192.168.0.153 - POST /api/users/1/routines 201 50 - 3.111 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:15:38.310Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.481 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:15:38.442Z 192.168.0.153 - GET /api/users/1/routines 200 224 - 2.609 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:15:41.828Z 192.168.0.153 - DELETE /api/users/1/routines/9 200 68 - 7.851 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:15:44.440Z 192.168.0.153 - DELETE /api/users/1/routines/8 200 68 - 4.855 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:15:48.799Z 192.168.0.153 - GET /api/users/1/routines 200 172 - 1.447 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:15:51.909Z 192.168.0.153 - DELETE /api/users/1/routines/7 200 68 - 2.865 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:15:59.161Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.474 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:15:59.301Z 192.168.0.153 - GET /api/users/1/routines 200 147 - 2.260 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:16:03.362Z 192.168.0.153 - DELETE /api/users/1/routines/6 200 68 - 3.348 ms Mozilla/5.0 (Linux; Android 8.0.0; SM-G955U Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:16:17.168Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.665 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:16:17.312Z 192.168.0.153 - GET /api/users/1/routines 200 121 - 2.967 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:16:23.798Z 192.168.0.153 - POST /api/users/1/routines 201 53 - 2.788 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:16:28.373Z 192.168.0.153 - DELETE /api/users/1/routines/10 200 69 - 3.607 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:29:15.803Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.987 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:29:16.137Z 192.168.0.153 - GET /api/users/1/routines 200 121 - 143.182 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:31:43.638Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.566 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:31:43.791Z 192.168.0.153 - GET /api/users/1/routines 304 - - 2.703 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:34:23.520Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.441 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:34:23.804Z 192.168.0.153 - GET /api/users/1/routines 304 - - 143.886 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:34:45.322Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.725 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:34:45.514Z 192.168.0.153 - GET /api/users/1/routines 304 - - 3.626 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:34:54.772Z 192.168.0.153 - POST /api/users/1/routines 201 48 - 6.273 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:34:58.282Z 192.168.0.153 - PUT /api/users/1/routines/11 200 48 - 3.576 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:35:00.131Z 192.168.0.153 - PUT /api/users/1/routines/11 200 48 - 2.733 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:35:18.870Z 192.168.0.153 - PUT /api/users/1/routines/11 200 48 - 2.657 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:36:02.927Z 192.168.0.112 - POST /api/auth/login 200 96 - 57.800 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:36:07.745Z 192.168.0.112 - POST /api/auth/login 200 96 - 56.221 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:36:11.975Z 192.168.0.112 - POST /api/auth/login 200 96 - 55.056 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:36:23.470Z 192.168.0.112 - POST /api/auth/login 200 96 - 55.524 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:36:56.310Z 192.168.0.153 - POST /api/auth/logout 200 43 - 0.573 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:37:12.965Z 192.168.0.153 - POST /api/auth/login 200 96 - 56.285 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:37:18.360Z 192.168.0.153 - POST /api/auth/login 200 96 - 55.375 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:38:01.079Z 192.168.0.153 - POST /api/auth/login 200 96 - 55.378 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:38:37.410Z 192.168.0.153 - POST /api/auth/login 200 96 - 55.660 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:38:43.310Z 192.168.0.153 - POST /api/auth/login 200 96 - 55.749 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:39:35.459Z 192.168.0.153 - POST /api/auth/login 200 96 - 93.891 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:39:44.243Z 192.168.0.153 - POST /api/auth/login 200 96 - 55.434 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:40:14.811Z 192.168.0.153 - POST /api/auth/login 200 96 - 55.218 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:40:26.639Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.382 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:40:30.689Z 192.168.0.153 - POST /api/auth/login 401 44 - 56.124 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:40:43.265Z 192.168.0.153 - POST /api/auth/login 401 44 - 56.274 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:41:07.101Z 192.168.0.153 - POST /api/auth/login 200 96 - 55.773 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:42:13.154Z 192.168.0.153 - POST /api/auth/login 200 60 - 106.358 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:42:28.097Z 192.168.0.153 - POST /api/auth/login 200 60 - 56.695 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:42:49.185Z 192.168.0.153 - GET /api/auth/validate 200 28 - 3.804 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:42:56.806Z 192.168.0.153 - POST /api/auth/login 200 60 - 56.366 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:43:24.325Z 192.168.0.153 - POST /api/auth/login 200 60 - 55.720 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:44:48.031Z 192.168.0.153 - POST /api/auth/login 200 60 - 55.470 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:46:53.706Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.791 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:46:57.347Z 192.168.0.153 - POST /api/auth/login 200 60 - 56.727 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:47:10.137Z 192.168.0.153 - GET /api/auth/validate 200 28 - 1.055 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:47:14.489Z 192.168.0.153 - POST /api/auth/login 200 60 - 193.305 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:47:18.480Z 192.168.0.153 - POST /api/auth/login 200 60 - 56.094 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:47:35.798Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.509 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:47:39.022Z 192.168.0.153 - POST /api/auth/login 200 60 - 57.342 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:47:43.670Z 192.168.0.153 - POST /api/auth/login 200 60 - 55.951 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:48:06.346Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.517 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:48:22.315Z 192.168.0.153 - POST /api/auth/login 200 60 - 55.231 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:48:27.532Z 192.168.0.153 - POST /api/auth/login 200 60 - 55.083 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:48:29.923Z 192.168.0.153 - POST /api/auth/login 200 60 - 55.495 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:48:31.518Z 192.168.0.153 - POST /api/auth/login 200 60 - 55.763 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:48:32.708Z 192.168.0.153 - POST /api/auth/login 200 60 - 56.694 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:49:03.220Z 192.168.0.153 - GET /api/auth/validate 200 28 - 1.096 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:49:07.516Z 192.168.0.153 - POST /api/auth/login 200 60 - 56.503 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:49:35.718Z 192.168.0.153 - POST /api/auth/logout 200 43 - 0.578 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:49:38.190Z 192.168.0.153 - POST /api/auth/login 401 44 - 3.816 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:49:42.627Z 192.168.0.153 - POST /api/auth/login 401 44 - 1.796 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:49:58.599Z 192.168.0.153 - POST /api/auth/login 200 60 - 56.148 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-29T23:50:07.386Z 192.168.0.112 - POST /api/auth/login 200 60 - 56.105 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:13.468Z 192.168.0.112 - GET /api/users/1/routines 200 143 - 7.402 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:17.442Z 192.168.0.112 - DELETE /api/users/1/routines/11 200 69 - 8.709 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:24.261Z 192.168.0.112 - DELETE /api/users/1/routines/5 200 68 - 3.358 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:26.918Z 192.168.0.112 - GET /api/users/1/routines 200 95 - 2.251 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:31.670Z 192.168.0.112 - POST /api/users/1/routines 201 53 - 4.415 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:34.248Z 192.168.0.112 - GET /api/users/1/routines/12/sets 200 29 - 3.835 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:35.907Z 192.168.0.112 - GET /api/users/1/routines 200 122 - 2.562 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:36.718Z 192.168.0.112 - GET /api/users/1/routines/12/sets 304 - - 2.445 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:38.906Z 192.168.0.112 - GET /api/users/1/routines 304 - - 3.011 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:39.491Z 192.168.0.112 - GET /api/users/1/routines/2/sets 200 896 - 6.093 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:40.136Z 192.168.0.112 - GET /api/users/1/routines 304 - - 2.285 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:41.056Z 192.168.0.112 - GET /api/users/1/routines/2/sets 304 - - 3.916 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:41.800Z 192.168.0.112 - GET /api/users/1/routines 304 - - 1.847 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:42.869Z 192.168.0.112 - GET /api/auth/validate 200 28 - 0.354 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:42.890Z 192.168.0.112 - GET /api/users/1/routines 304 - - 2.413 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:43.602Z 192.168.0.112 - GET /api/users/1/routines/2/sets 304 - - 2.786 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:45.056Z 192.168.0.112 - GET /api/users/1/routines 304 - - 1.866 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:45.591Z 192.168.0.112 - GET /api/users/1/routines/2/sets 304 - - 2.554 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:48.162Z 192.168.0.112 - GET /api/users/1/routines 304 - - 2.232 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:48.783Z 192.168.0.112 - GET /api/users/1/routines/12/sets 304 - - 2.363 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:55.596Z 192.168.0.112 - GET /api/users/1/routines 304 - - 2.489 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-29T23:50:56.373Z 192.168.0.112 - GET /api/users/1/routines/12/sets 304 - - 2.268 ms Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Mobile Safari/537.36
+2025-12-30T00:17:20.754Z 192.168.0.153 - GET /api/users/1/routines 200 122 - 57.168 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-30T00:17:22.144Z 192.168.0.153 - GET /api/users/1/routines/12/sets 200 29 - 4.667 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-30T00:17:23.171Z 192.168.0.153 - GET /api/exercises 304 - - 6.912 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-30T00:19:53.681Z 192.168.0.153 - GET /api/auth/validate 200 28 - 1.206 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-30T00:19:53.854Z 192.168.0.153 - GET /api/users/1/routines/12/sets 304 - - 4.077 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-30T00:19:54.630Z 192.168.0.153 - GET /api/exercises 304 - - 3.563 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-30T00:20:08.574Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.532 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-30T00:20:08.712Z 192.168.0.153 - GET /api/users/1/routines/12/sets 304 - - 2.393 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-30T00:20:09.593Z 192.168.0.153 - GET /api/exercises 304 - - 2.812 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-30T00:20:35.566Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.433 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-30T00:20:35.704Z 192.168.0.153 - GET /api/users/1/routines/12/sets 304 - - 2.631 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-30T00:20:36.631Z 192.168.0.153 - GET /api/exercises 304 - - 2.932 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-30T00:23:16.987Z 192.168.0.153 - GET /api/auth/validate 200 28 - 0.741 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-30T00:23:17.234Z 192.168.0.153 - GET /api/users/1/routines/12/sets 304 - - 64.161 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-30T00:23:18.385Z 192.168.0.153 - GET /api/exercises 304 - - 6.997 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+2025-12-30T00:23:35.314Z 192.168.0.153 - POST /api/users/1/routines/12/sets 201 244 - 8.271 ms Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
