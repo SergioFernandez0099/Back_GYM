@@ -215,22 +215,22 @@ export const createUserRoutineSet = async (req, res, next) => {
     try {
         const userId = Number(req.params.id);
         const routineId = Number(req.params.routineId);
-        const { exerciseId, series, repetitions, description } = req.body;
+        const {exerciseId, series, repetitions, description} = req.body;
 
         if (!exerciseId || !series || !repetitions) {
             throw new ErrorIncorrectParam("Faltan parámetros obligatorios");
         }
 
         const routine = await prisma.routine.findFirstOrThrow({
-            where: { id: routineId, userId },
+            where: {id: routineId, userId},
         });
 
         const newSet = await prisma.$transaction(async (tx) => {
 
             const lastSet = await tx.routineSet.findFirst({
-                where: { routineId: routine.id },
-                orderBy: { order: 'desc' },
-                select: { order: true },
+                where: {routineId: routine.id},
+                orderBy: {order: 'desc'},
+                select: {order: true},
             });
 
             const newOrder = lastSet ? lastSet.order + 1 : 1;
@@ -244,7 +244,7 @@ export const createUserRoutineSet = async (req, res, next) => {
                     description,
                     order: newOrder,
                 },
-                include: { exercise: true },
+                include: {exercise: true},
             });
         });
 
@@ -342,7 +342,7 @@ export const getUserTrainingSessions = async (req, res, next) => {
                 id: true,
                 date: true,
                 routineName: true,
-                notes: true,
+                description: true,
             }
         });
 
@@ -366,12 +366,12 @@ export const getUserTrainingSession = async (req, res, next) => {
                 id: true,
                 date: true,
                 routineName: true,
-                notes: true,
+                description: true,
                 sessionExercises: {
                     select: {
                         id: true,
-                        seriesNumber: true,
                         order: true,
+                        description: true,
                         exercise: {
                             select: {
                                 id: true,
@@ -399,7 +399,10 @@ export const getUserTrainingSession = async (req, res, next) => {
                                 order: 'asc',
                             },
                         }
-                    }
+                    },
+                    orderBy: {
+                        order: 'asc',
+                    },
                 }
             }
         });
@@ -447,7 +450,6 @@ export const createUserTrainingSession = async (req, res, next) => {
         let sessionData = {
             userId: userId,
             date: date,
-            notes: 'Sesión generada desde rutina',
         };
 
         if (routineId !== -1) {
@@ -478,12 +480,13 @@ export const createUserTrainingSession = async (req, res, next) => {
                 sessionExercises: {
                     create: routine.sets.map((set) => ({
                         exerciseId: set.exerciseId,
-                        seriesNumber: set.series,
                         order: set.order,
+                        description: set.description,
                         series: {
                             create: Array.from({length: set.series}).map((_, i) => ({
                                 order: i + 1,
-                                reps: 1
+                                reps: 1,
+                                unitId: 1,
                             })),
                         },
                     })),
@@ -575,7 +578,6 @@ export const createTrainingSessionExercise = async (req, res, next) => {
             data: {
                 sessionId: session.id,
                 exerciseId,
-                seriesNumber: DEFAULT_SERIES,
                 order: existingExercisesCount + 1,
                 series: {
                     create: Array.from({length: DEFAULT_SERIES}).map((_, i) => ({
@@ -710,18 +712,20 @@ export const deleteTrainingSessionExercise = async (req, res, next) => {
     }
 };
 
-export const updateTrainingSessionSeries = async (req, res, next) => {
+// esta función sirve para actualizar la descripción y las series
+export const updateTrainingSession = async (req, res, next) => {
     try {
         const userId = Number(req.params.id);
         const sessionId = Number(req.params.sessionId);
         const exerciseInSessionId = Number(req.params.exerciseInSessionId);
 
-        const {series} = req.body;
+        const {series, description} = req.body;
 
-        if (!Array.isArray(series) || series.length === 0) {
+        // Validar que al menos uno de los dos campos está presente
+        if ((!Array.isArray(series) || series.length === 0) && !description) {
             return res.status(400).json({
                 ok: false,
-                message: "No hay series para actualizar",
+                message: "Debe proporcionar series o descripción para actualizar",
             });
         }
 
@@ -737,9 +741,22 @@ export const updateTrainingSessionSeries = async (req, res, next) => {
             select: {id: true},
         });
 
-        // 2. Transacción con PATCH real
-        await prisma.$transaction(
-            series.map((serie) => {
+        // 2. Preparar las operaciones de la transacción
+        const operations = [];
+
+        // Si hay descripción, actualizar el TrainingSessionExercise
+        if (description !== undefined) {
+            operations.push(
+                prisma.trainingSessionExercise.update({
+                    where: {id: exerciseInSessionId},
+                    data: {description: description},
+                })
+            );
+        }
+
+        // Si hay series, agregarlas a las operaciones
+        if (Array.isArray(series) && series.length > 0) {
+            series.forEach((serie) => {
                 const data = {};
 
                 if ("reps" in serie) data.reps = serie.reps;
@@ -748,31 +765,30 @@ export const updateTrainingSessionSeries = async (req, res, next) => {
                 if ("rir" in serie) data.rir = serie.rir;
                 if ("unitId" in serie) data.unitId = serie.unitId;
 
-                if (Object.keys(data).length === 0) {
-                    // No hay nada que actualizar → evita update vacío
-                    return Promise.resolve();
+                if (Object.keys(data).length > 0) {
+                    operations.push(
+                        prisma.series.update({
+                            where: {
+                                id: serie.id,
+                                sessionExerciseId: exerciseInSessionId,
+                            },
+                            data,
+                        })
+                    );
                 }
+            });
+        }
 
-                return prisma.series.update({
-                    where: {
-                        id: serie.id,
-                        sessionExerciseId: exerciseInSessionId,
-                    },
-                    data,
-                });
-            })
-        );
+        // 3. Ejecutar todas las operaciones en una transacción
+        if (operations.length > 0) {
+            await prisma.$transaction(operations);
+        }
 
-        // res.status(200).json({
-        //     ok: true,
-        //     body: "Series actualizadas correctamente",
-        // });
-        respuesta.success(res, `Series actualizadas correctamente`);
+        respuesta.success(res, `Actualización completada correctamente`);
     } catch (error) {
         next(error);
     }
 };
-
 export const deleteTrainingSessionSerie = async (req, res, next) => {
     try {
         const userId = Number(req.params.id);
@@ -835,6 +851,7 @@ export const updateTrainingSessionExerciseOrder = async (req, res, next) => {
     const sessionId = Number(req.params.sessionId);
     const orderedExerciseIds = req.body;
 
+    console.log("bien")
     if (!Array.isArray(orderedExerciseIds)) {
         return res.status(400).json({
             error: "orderedExerciseIds debe ser un array"
@@ -865,8 +882,6 @@ export const updateTrainingSessionExerciseOrder = async (req, res, next) => {
                 });
             }
         });
-
-        console.log("actualizado correctamente")
 
         // res.status(200).send({ok: true});
         respuesta.success(res, `Orden actualizado correctamente`);

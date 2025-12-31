@@ -107,12 +107,11 @@ async function main() {
         data: {
             userId: userCarlos.id,
             routineName: 'Full Body Pro',
-            notes: 'Primera sesión completa',
+            description: 'Primera sesión completa',
             sessionExercises: {
                 create: [
                     {
                         exerciseId: 1, // Press banca
-                        seriesNumber: 3,
                         order: 1,
                         series: {
                             create: [
@@ -123,7 +122,6 @@ async function main() {
                     },
                     {
                         exerciseId: 4, // Peso muerto
-                        seriesNumber: 3,
                         order: 2,
                         series: {
                             create: [
