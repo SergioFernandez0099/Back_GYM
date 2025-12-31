@@ -33,6 +33,7 @@ model Exercise {
   logs          TrainingSessionExercise[]
   muscleGroupId Int?
   muscleGroup   MuscleGroup?              @relation(fields: [muscleGroupId], references: [id])
+  createdAt     DateTime                  @default(now())
 }
 
 // ------------------- Grupos musculares -------------------
@@ -40,6 +41,7 @@ model MuscleGroup {
   id        Int        @id @default(autoincrement())
   name      String     @unique
   exercises Exercise[]
+  createdAt DateTime   @default(now())
 }
 
 // ------------------- Rutinas -------------------
@@ -56,13 +58,14 @@ model Routine {
 
 // ------------------- Sets de la rutina -------------------
 model RoutineSet {
-  id          Int     @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   series      Int
   repetitions Int
   description String?
   order       Int
   routineId   Int
   exerciseId  Int
+  createdAt   DateTime @default(now())
 
   routine  Routine  @relation(fields: [routineId], references: [id], onDelete: Cascade)
   exercise Exercise @relation("ExerciseToRoutineSet", fields: [exerciseId], references: [id])
@@ -72,9 +75,10 @@ model RoutineSet {
 
 // ------------------- Unidades (kg, lb, etc.) -------------------
 model Unit {
-  id     Int     @id @default(autoincrement())
-  name   String  @unique // Ej: "kg", "lb", "bodyweight"
-  symbol String? // Ej: "kg", "lb"
+  id        Int      @id @default(autoincrement())
+  name      String   @unique // Ej: "kg", "lb", "bodyweight"
+  symbol    String? // Ej: "kg", "lb"
+  createdAt DateTime @default(now())
 
   series Series[]
 }
@@ -85,7 +89,8 @@ model TrainingSession {
   date        DateTime @default(now())
   userId      Int
   routineName String // snapshot del nombre de la rutina
-  notes       String?
+  description String?
+  createdAt   DateTime @default(now())
 
   user             User                      @relation(fields: [userId], references: [id], onDelete: Cascade)
   sessionExercises TrainingSessionExercise[]
@@ -93,11 +98,12 @@ model TrainingSession {
 
 // ------------------- Ejercicios realizados en la sesión -------------------
 model TrainingSessionExercise {
-  id           Int @id @default(autoincrement())
-  exerciseId   Int
-  seriesNumber Int
-  sessionId    Int
-  order        Int
+  id          Int      @id @default(autoincrement())
+  exerciseId  Int
+  sessionId   Int
+  order       Int
+  description String?
+  createdAt   DateTime @default(now())
 
   exercise Exercise        @relation(fields: [exerciseId], references: [id])
   session  TrainingSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
@@ -116,6 +122,7 @@ model Series {
   weight    Float? // Carga utilizada
   intensity Int? // RPE / %RM / esfuerzo percibido
   rir       Int?
+  createdAt DateTime @default(now())
 
   unitId Int? // Unidad opcional (kg, lb...)
 

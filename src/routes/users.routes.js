@@ -20,7 +20,7 @@ import {
     getUserTrainingSession,
     getUserTrainingSessions,
     updateTrainingSessionExerciseOrder,
-    updateTrainingSessionSeries,
+    updateTrainingSession,
     updateUser,
     updateUserRoutine,
     updateUserRoutineSet,
@@ -36,7 +36,7 @@ const router = Router();
 router.get("/:id", authenticate, validateId, getUser);
 router.get("/", authenticate, getUsers);
 router.post("/", authenticate, validateBody, validateCreateUser, createUser);
-router.put(
+router.patch(
     "/:id",
     authenticate,
     validateId,
@@ -49,7 +49,7 @@ router.delete("/:id", authenticate, validateId, deleteUser);
 // RUTINAS DEL USUARIO
 router.get("/:id/routines", authenticate, validateId, getUserRoutines);
 router.post("/:id/routines", authenticate, validateBody, createUserRoutine);
-router.put(
+router.patch(
     "/:id/routines/:routineId",
     validateId,
     validateBody,
@@ -76,7 +76,7 @@ router.post(
     validateBody,
     createUserRoutineSet
 );
-router.put(
+router.patch(
     "/:id/routines/:routineId/sets/:setId",
     authenticate,
     validateId,
@@ -101,19 +101,13 @@ router.get("/:id/sessions/:sessionId/exercises", authenticate, validateId, getTr
 router.post("/:id/sessions/:sessionId/exercises", authenticate, validateId, validateBody, createTrainingSessionExercise);
 router.delete("/:id/sessions/:sessionId/exercises/:exerciseInSessionId", authenticate, validateId, deleteTrainingSessionExercise);
 
-// REPETICIONES DE UN EJERCICIO EN SESIÓN
+// SERIES DE UN EJERCICIO EN SESIÓN
 router.post("/:id/sessions/:sessionId/exercises/:exerciseInSessionId/series",
     authenticate,
     validateId,
     createTrainingSessionSerie
 );
-router.patch(
-    "/:id/sessions/:sessionId/exercises/:exerciseInSessionId/series",
-    authenticate,
-    validateId,
-    validateBody,
-    updateTrainingSessionSeries
-);
+
 router.delete("/:id/sessions/:sessionId/exercises/:exerciseInSessionId/series/:serieId",
     authenticate,
     validateId,
@@ -127,5 +121,13 @@ router.patch(
     updateTrainingSessionExerciseOrder
 );
 
+// ESTE ES PARA MODIFICAR LA DESCRIPCIÓN Y LAS SERIES
+router.patch(
+    "/:id/sessions/:sessionId/exercises/:exerciseInSessionId",
+    authenticate,
+    validateId,
+    validateBody,
+    updateTrainingSession
+);
 
 export default router;
