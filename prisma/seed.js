@@ -29,18 +29,115 @@ async function main() {
 
     // 3️⃣ Crear ejercicios
     const exercisesData = [
-        {name: 'Press banca', imageUrl: '/assets/images/exercises/pecho/press_banca.png', muscleGroupId: 1},
-        {name: 'Press inclinado', imageUrl: '/assets/images/exercises/pecho/press_inclinado.png', muscleGroupId: 1},
         {
-            name: 'Fondos en paralelas',
-            imageUrl: '/assets/images/exercises/pecho/fondos_en_paralelas.png',
+            name: 'Press banca',
+            imageUrl: '/assets/images/exercises/pecho/press_banca.avif',
             muscleGroupId: 1
         },
-        {name: 'Peso muerto', imageUrl: '/assets/images/exercises/espalda/peso_muerto.png', muscleGroupId: 2},
+        {
+            name: 'Press inclinado',
+            imageUrl: '/assets/images/exercises/pecho/press_inclinado.avif',
+            muscleGroupId: 1
+        },
+        {
+            name: 'Press declinado',
+            imageUrl: '/assets/images/exercises/pecho/press_declinado.avif',
+            muscleGroupId: 1
+        },
+        {
+            name: 'Press inclinado con mancuernas',
+            imageUrl: '/assets/images/exercises/pecho/press_inclinado_mancuernas.avif',
+            muscleGroupId: 1
+        },
+        {
+            name: 'Press con mancuernas',
+            imageUrl: '/assets/images/exercises/pecho/press_mancuernas.avif',
+            muscleGroupId: 1
+        },
+        {
+            name: 'Fondos en paralelas',
+            imageUrl: '/assets/images/exercises/pecho/fondos.avif',
+            muscleGroupId: 1
+        },
+        {
+            name: 'Aperturas con mancuernas',
+            imageUrl: '/assets/images/exercises/pecho/aperturas_mancuernas.avif',
+            muscleGroupId: 1
+        },
+        {
+            name: 'Aperturas en máquina',
+            imageUrl: '/assets/images/exercises/pecho/aperturas_maquina.avif',
+            muscleGroupId: 1
+        },
+        {
+            name: 'Flexiones',
+            imageUrl: '/assets/images/exercises/pecho/flexion.avif',
+            muscleGroupId: 1
+        },
+        {
+            name: 'Flexiones declinadas',
+            imageUrl: '/assets/images/exercises/pecho/flexion_declinada.avif',
+            muscleGroupId: 1
+        },
+        {
+            name: 'Cruce de poleas',
+            imageUrl: '/assets/images/exercises/pecho/cruze_poleas.avif',
+            muscleGroupId: 1
+        },
+        {
+            name: 'Press en multipower',
+            imageUrl: '/assets/images/exercises/pecho/press_multipower.avif',
+            muscleGroupId: 1
+        },
+        {
+            name: 'Press en máquina',
+            imageUrl: '/assets/images/exercises/pecho/press_maquina.avif',
+            muscleGroupId: 1
+        },
         {name: 'Dominadas', imageUrl: '/assets/images/exercises/espalda/dominadas.avif', muscleGroupId: 2},
+        {
+            name: 'Dominadas agarre neutro',
+            imageUrl: '/assets/images/exercises/espalda/dominadas_neutro.avif',
+            muscleGroupId: 2
+        },
+        {
+            name: 'Dominadas agarre supino',
+            imageUrl: '/assets/images/exercises/espalda/dominadas_supino.avif',
+            muscleGroupId: 2
+        },
+        {name: 'Encogimientos', imageUrl: '/assets/images/exercises/espalda/encogimientos.avif', muscleGroupId: 2},
+        {
+            name: 'Hiperextensiones espalda',
+            imageUrl: '/assets/images/exercises/espalda/hiperextensiones_espalda.avif',
+            muscleGroupId: 2
+        },
+        {name: 'Jalón al pecho', imageUrl: '/assets/images/exercises/espalda/jalon.avif', muscleGroupId: 2},
+        {name: 'Pullover', imageUrl: '/assets/images/exercises/espalda/pullover.avif', muscleGroupId: 2},
+        {name: 'Remo en banco', imageUrl: '/assets/images/exercises/espalda/remo_banco.avif', muscleGroupId: 2},
+        {name: 'Remo gironda', imageUrl: '/assets/images/exercises/espalda/remo_gironda.avif', muscleGroupId: 2},
+        {name: 'Remo libre', imageUrl: '/assets/images/exercises/espalda/remo_libre.avif', muscleGroupId: 2},
+        {name: 'Remo en máquina', imageUrl: '/assets/images/exercises/espalda/remo_maquina.avif', muscleGroupId: 2},
+        {name: 'Remo alto en máquina', imageUrl: '/assets/images/exercises/espalda/remo_alto.avif', muscleGroupId: 2},
+        {name: 'Remo pendlay', imageUrl: '/assets/images/exercises/espalda/remo_pendlay.avif', muscleGroupId: 2},
+        {name: 'Seal row', imageUrl: '/assets/images/exercises/espalda/remo_seal.avif', muscleGroupId: 2},
+        {name: 'Remo en T', imageUrl: '/assets/images/exercises/espalda/remo_t.avif', muscleGroupId: 2},
         {name: 'Press militar', imageUrl: '/assets/images/exercises/hombro/press_militar.avif', muscleGroupId: 3},
         {name: 'Curl con barra', imageUrl: '/assets/images/exercises/biceps/curl_barra.png', muscleGroupId: 4},
+        {name: 'Extensión de cuádriceps', imageUrl: '/assets/images/exercises/cuadriceps/extensiones.avif', muscleGroupId: 6},
+        {name: 'Hack squat', imageUrl: '/assets/images/exercises/cuadriceps/hack_squat.avif', muscleGroupId: 6},
+        {name: 'Pistol squat', imageUrl: '/assets/images/exercises/cuadriceps/pistol_squat.avif', muscleGroupId: 6},
+        {name: 'Prensa', imageUrl: '/assets/images/exercises/cuadriceps/prensa.avif', muscleGroupId: 6},
+        {name: 'Prensa horizontal', imageUrl: '/assets/images/exercises/cuadriceps/prensa_horizontal.avif', muscleGroupId: 6},
+        {name: 'Prensa vertical', imageUrl: '/assets/images/exercises/cuadriceps/prensa_vertical.avif', muscleGroupId: 6},
         {name: 'Sentadilla', imageUrl: '/assets/images/exercises/cuadriceps/sentadilla.avif', muscleGroupId: 6},
+        {name: 'Sentadilla belt', imageUrl: '/assets/images/exercises/cuadriceps/sentadilla_belt.avif', muscleGroupId: 6},
+        {name: 'Sentadilla búlgara', imageUrl: '/assets/images/exercises/cuadriceps/sentadilla_bulgara.avif', muscleGroupId: 6},
+        {name: 'Sentadilla frontal', imageUrl: '/assets/images/exercises/cuadriceps/sentadilla_frontal.avif', muscleGroupId: 6},
+        {name: 'Sentadilla goblet', imageUrl: '/assets/images/exercises/cuadriceps/sentadilla_goblet.avif', muscleGroupId: 6},
+        {name: 'Sentadilla en multipower', imageUrl: '/assets/images/exercises/cuadriceps/sentadilla_multipower.avif', muscleGroupId: 6},
+        {name: 'Sentadilla con safety bar', imageUrl: '/assets/images/exercises/cuadriceps/sentadilla_safety_bar.avif', muscleGroupId: 6},
+        {name: 'Sentadilla sissy', imageUrl: '/assets/images/exercises/cuadriceps/sentadilla_sissy.avif', muscleGroupId: 6},
+        {name: 'Zancadas', imageUrl: '/assets/images/exercises/cuadriceps/zancadas.avif', muscleGroupId: 6},
         {name: 'Hip thrust', imageUrl: '/assets/images/exercises/gluteo/hip_thrust.png', muscleGroupId: 8},
         {name: 'Crunch abdominal', imageUrl: '/assets/images/exercises/abdomen/crunch.png', muscleGroupId: 12},
     ];

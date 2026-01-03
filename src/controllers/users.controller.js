@@ -851,7 +851,6 @@ export const updateTrainingSessionExerciseOrder = async (req, res, next) => {
     const sessionId = Number(req.params.sessionId);
     const orderedExerciseIds = req.body;
 
-    console.log("bien")
     if (!Array.isArray(orderedExerciseIds)) {
         return res.status(400).json({
             error: "orderedExerciseIds debe ser un array"
