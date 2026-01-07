@@ -56,22 +56,48 @@ VALUES ('Dominadas', '/assets/images/exercises/espalda/dominadas.avif', 2),
 -- Hombro (id = 3)
 INSERT
 INTO "Exercise" (name, "imageUrl", "muscleGroupId")
-VALUES ('Press militar', '/assets/images/exercises/hombro/press_militar.avif', 3),
-       ('Elevaciones laterales', '/assets/images/exercises/hombro/elevaciones_laterales.png', 3),
-       ('Elevaciones frontales', '/assets/images/exercises/hombro/elevaciones_frontales.png', 3),
-       ('Pájaros', '/assets/images/exercises/hombro/pajaros.png', 3);
+VALUES ('Elevaciones frontales', '/assets/images/exercises/hombro/elevaciones_frontales.avif', 3),
+       ('Elevaciones laterales en polea', '/assets/images/exercises/hombro/elevaciones_laterales_polea.avif', 3),
+       ('Elevaciones laterales con mancuernas', '/assets/images/exercises/hombro/elevaciones_laterales_mancuernas.avif',
+        3),
+       ('Elevaciones laterales en máquina', '/assets/images/exercises/hombro/elevaciones_laterales_maquina.avif', 3),
+       ('Face pull', '/assets/images/exercises/hombro/face_pull.avif', 3),
+       ('Flexiones pica', '/assets/images/exercises/hombro/flexiones_pica.avif', 3),
+       ('Press militar levantado', '/assets/images/exercises/hombro/press_militar_levantado.avif', 3),
+       ('Press militar con mancuernas levantado',
+        '/assets/images/exercises/hombro/press_militar_mancuernas_levantado.avif', 3),
+       ('Press militar con mancuernas sentado', '/assets/images/exercises/hombro/press_militar_mancuernas_sentado.avif',
+        3),
+       ('Press militar en máquina', '/assets/images/exercises/hombro/press_militar_maquina.avif', 3),
+       ('Press militar sentado', '/assets/images/exercises/hombro/press_militar_sentado.avif', 3),
+       ('Press pino', '/assets/images/exercises/hombro/press_pino.avif', 3);
 
 -- Bíceps (id = 4)
 INSERT INTO "Exercise" (name, "imageUrl", "muscleGroupId")
-VALUES ('Curl con barra', '/assets/images/exercises/biceps/curl_barra.png', 4),
-       ('Curl con mancuernas', '/assets/images/exercises/biceps/curl_mancuernas.png', 4),
-       ('Curl martillo', '/assets/images/exercises/biceps/curl_martillo.png', 4);
+VALUES ('Curl alterno', '/assets/images/exercises/biceps/curl_alterno.avif', 4),
+       ('Curl con barra recta', '/assets/images/exercises/biceps/curl_barra_recta.avif', 4),
+       ('Curl con barra Z', '/assets/images/exercises/biceps/curl_barra_z.avif', 4),
+       ('Curl bayesian en polea', '/assets/images/exercises/biceps/curl_bayesian.avif', 4),
+       ('Curl concentrado', '/assets/images/exercises/biceps/curl_concentrado.avif', 4),
+       ('Curl inclinado', '/assets/images/exercises/biceps/curl_inclinado.avif', 4),
+       ('Curl en máquina', '/assets/images/exercises/biceps/curl_maquina.avif', 4),
+       ('Curl martillo', '/assets/images/exercises/biceps/curl_martillo.avif', 4),
+       ('Curl en polea', '/assets/images/exercises/biceps/curl_polea.avif', 4),
+       ('Curl predicador con barra', '/assets/images/exercises/biceps/curl_predicador_barra.avif', 4),
+       ('Curl predicador con mancuerna', '/assets/images/exercises/biceps/curl_predicador_mancuerna.avif', 4);
 
 -- Tríceps (id = 5)
 INSERT INTO "Exercise" (name, "imageUrl", "muscleGroupId")
-VALUES ('Fondos en paralelas', '/assets/images/exercises/triceps/fondos_en_paralelas.png', 5),
-       ('Extensión de tríceps en polea', '/assets/images/exercises/triceps/extension_polea.png', 5),
-       ('Press francés', '/assets/images/exercises/triceps/press_frances.png', 5);
+VALUES ('Extensión de tríceps con cuerda', '/assets/images/exercises/triceps/extension_triceps_cuerda.avif', 5),
+       ('Extensión de tríceps en polea', '/assets/images/exercises/triceps/extension_triceps_polea.avif', 5),
+       ('Extensión de tríceps en polea baja', '/assets/images/exercises/triceps/extension_triceps_polea_baja.avif', 5),
+       ('Flexiones de diamante', '/assets/images/exercises/triceps/flexiones_diamante.avif', 5),
+       ('Press katana en polea', '/assets/images/exercises/triceps/press_katana_polea.avif', 5),
+       ('Press katana con mancuerna', '/assets/images/exercises/triceps/press_katana_mancuerna.avif', 5),
+       ('Fondos de tríceps en banco', '/assets/images/exercises/triceps/fondos_triceps_banco.avif', 5),
+       ('Fondos de tríceps en máquina', '/assets/images/exercises/triceps/fondos_triceps_maquina.avif', 5),
+       ('Press francés', '/assets/images/exercises/triceps/press_frances.avif', 5),
+       ('Press francés con mancuerna', '/assets/images/exercises/triceps/press_frances_mancuerna.avif', 5);
 
 -- Cuádriceps (id = 6)
 INSERT INTO "Exercise" (name, "imageUrl", "muscleGroupId")
@@ -94,30 +120,50 @@ VALUES ('Extensión de cuádriceps', '/assets/images/exercises/cuadriceps/extens
 -- Isquios (id = 7)
 INSERT
 INTO "Exercise" (name, "imageUrl", "muscleGroupId")
-VALUES ('Curl femoral tumbado', '/assets/images/exercises/isquios/curl_femoral_tumbado.png', 7),
-       ('Peso muerto rumano', '/assets/images/exercises/isquios/peso_muerto_rumano.avif', 7);
+VALUES ('Buenos días', '/assets/images/exercises/isquios/buenos_dias.avif', 7),
+       ('Buenos días en multipower', '/assets/images/exercises/isquios/buenos_dias_multipower.avif', 7),
+       ('Curl femoral de pie', '/assets/images/exercises/isquios/curl_femoral_levantado.avif', 7),
+       ('Curl femoral sentado', '/assets/images/exercises/isquios/curl_femoral_sentado.avif', 7),
+       ('Curl femoral tumbado', '/assets/images/exercises/isquios/curl_femoral_tumbado.avif', 7),
+       ('Curl nórdico', '/assets/images/exercises/isquios/curl_nordico.avif', 7),
+       ('Peso muerto convencional', '/assets/images/exercises/isquios/peso_muerto_convencional.avif', 7),
+       ('Peso muerto piernas rígidas', '/assets/images/exercises/isquios/peso_muerto_piernas_rigidas.avif', 7),
+       ('Peso muerto rumano', '/assets/images/exercises/isquios/peso_muerto_rumano.avif', 7),
+       ('Peso muerto rumano con mancuernas', '/assets/images/exercises/isquios/peso_muerto_rumano_mancuernas.avif', 7),
+       ('Peso muerto sumo', '/assets/images/exercises/isquios/peso_muerto_sumo.avif', 7);
 
 -- Glúteo (id = 8)
 INSERT INTO "Exercise" (name, "imageUrl", "muscleGroupId")
-VALUES ('Hip thrust', '/assets/images/exercises/gluteo/hip_thrust.png', 8),
-       ('Puente de glúteos', '/assets/images/exercises/gluteo/puente_gluteos.png', 8);
+VALUES ('Empuje de cadera', '/assets/images/exercises/gluteo/empuje_cadera.avif', 8),
+       ('Hip thrust', '/assets/images/exercises/gluteo/hip_thrust.avif', 8),
+       ('Patada de glúteo', '/assets/images/exercises/gluteo/patada_gluteo.avif', 8),
+       ('Puente de glúteos', '/assets/images/exercises/gluteo/puente_gluteos.avif', 8);
 
 -- Gemelo (id = 9)
 INSERT INTO "Exercise" (name, "imageUrl", "muscleGroupId")
-VALUES ('Elevaciones de talones de pie', '/assets/images/exercises/gemelo/elevaciones_talones_pie.png', 9),
-       ('Elevaciones de talones sentado', '/assets/images/exercises/gemelo/elevaciones_talones_sentado.png', 9);
+VALUES ('Elevaciones de gemelo con barra', '/assets/images/exercises/gemelo/gemelo_levantado_barra.avif', 9),
+       ('Elevaciones de gemelo con mancuernas', '/assets/images/exercises/gemelo/gemelo_levantado_mancuernas.avif', 9),
+       ('Elevaciones de gemelo en máquina', '/assets/images/exercises/gemelo/gemelo_levantado_maquina.avif', 9),
+       ('Elevaciones de gemelo sentado en máquina', '/assets/images/exercises/gemelo/gemelo_sentado_maquina.avif', 9);
 
 -- Adductor (id = 10)
 INSERT INTO "Exercise" (name, "imageUrl", "muscleGroupId")
-VALUES ('Máquina de aductores', '/assets/images/exercises/adductor/maquina_aductores.png', 10);
+VALUES ('Adductor en máquina', '/assets/images/exercises/adductor/adductor_maquina.avif', 10),
+       ('Adductor en polea', '/assets/images/exercises/adductor/adductor_polea.avif', 10);
 
 -- Abductor (id = 11)
 INSERT INTO "Exercise" (name, "imageUrl", "muscleGroupId")
-VALUES ('Máquina de abductores', '/assets/images/exercises/abductor/maquina_abductores.png', 11),
-       ('Elevaciones laterales de pierna', '/assets/images/exercises/abductor/elevaciones_laterales_pierna.png', 11);
+VALUES ('Abductor en máquina', '/assets/images/exercises/abductor/abductor_maquina.avif', 11),
+       ('Abductor en polea', '/assets/images/exercises/abductor/abductor_polea.avif', 11);
 
 -- Abdomen (id = 12)
 INSERT INTO "Exercise" (name, "imageUrl", "muscleGroupId")
-VALUES ('Crunch abdominal', '/assets/images/exercises/abdomen/crunch.png', 12),
-       ('Plancha', '/assets/images/exercises/abdomen/plancha.png', 12),
-       ('Elevaciones de piernas', '/assets/images/exercises/abdomen/elevaciones_piernas.png', 12);
+VALUES ('Abdomen en polea', '/assets/images/exercises/abdomen/abdomen_polea.avif', 12),
+       ('Crunch abdominal', '/assets/images/exercises/abdomen/crunch_abominal.avif', 12),
+       ('Elevación de piernas en barra', '/assets/images/exercises/abdomen/elevacion_piernas_barra.avif', 12),
+       ('Elevación de piernas tumbado', '/assets/images/exercises/abdomen/elevacion_piernas_tumbado.avif', 12),
+       ('Elevación de rodillas', '/assets/images/exercises/abdomen/elevacion_rodillas.avif', 12),
+       ('Mountain climber', '/assets/images/exercises/abdomen/mountain_climber.avif', 12),
+       ('Pies a la barra', '/assets/images/exercises/abdomen/pies_barra.avif', 12),
+       ('Press Pallof', '/assets/images/exercises/abdomen/press_pallof.avif', 12),
+       ('Rueda abdominal', '/assets/images/exercises/abdomen/rueda_abdominal.avif', 12);
