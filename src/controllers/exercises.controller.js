@@ -3,6 +3,7 @@ import respuesta from "../utils/responses.js";
 
 export const getExercises = async (req, res, next) => {
     try {
+        //throw new ErrorIncorrectParam("hola");
         const exercises = await prisma.exercise.findMany({
             select: {
                 id: true,

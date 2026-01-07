@@ -7,9 +7,9 @@ import {
     ErrorSolicitud,
 } from "../errors/businessErrors.js";
 import {handlePrismaError} from "../errors/prismaErrors.js";
+import {logger} from "../logger.js";
 
 export function errorHandler(err, req, res, next) {
-    console.error("-> Error ", err);
 
     // 1️⃣ Errores de parsing JSON de express.json()
     if (err.type === "entity.parse.failed") {
@@ -24,6 +24,14 @@ export function errorHandler(err, req, res, next) {
         err instanceof ErrorIncorrectParam ||
         err instanceof ErrorRegisterNotFound
     ) {
+        logger.warn("Error de negocio", {
+            type: err.constructor.name,
+            message: err.message,
+            path: req.path,
+            method: req.method,
+            user: req.userId || null
+        });
+
         let status = 500;
         switch (err.constructor) {
             case ErrorAutenticacion:
@@ -46,10 +54,26 @@ export function errorHandler(err, req, res, next) {
     // Errores de Prisma
     const prismaErr = handlePrismaError(err);
     if (prismaErr) {
+        logger.error("Error de Prisma", {
+            message: prismaErr.message,
+            code: prismaErr.code,
+            path: req.path,
+            method: req.method,
+            user: req.user || null
+        });
         return respuesta.error(res, prismaErr.message, prismaErr.statusCode);
     }
 
     // Error genérico
+    logger.error("Error interno", {
+        message: err.message,
+        stack: err.stack,
+        path: req.path,
+        method: req.method,
+        body: req.body,
+        user: req.user || null
+    });
+
     const mensaje = err.message || "Error interno";
     const estado = err.statusCode || 500;
     return respuesta.error(res, mensaje, estado);

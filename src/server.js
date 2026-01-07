@@ -1,14 +1,14 @@
 import express from "express";
 import cors from "cors";
-import {loggerMiddleware} from "./middlewares/logger.js";
 import usersRoutes from "./routes/users.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import exercisesRoutes from "./routes/exercises.routes.js";
 import muscleGroupsRoutes from "./routes/muscleGroups.routes.js";
 import {configApp} from "./config/config.js";
 import {errorHandler} from "./middlewares/errorHandler.js";
-import os from "os"; // Importamos para obtener la IP local
+import os from "os";
 import cookieParser from "cookie-parser";
+import {loggerMiddleware} from "./middlewares/loggerMiddleware.js";
 
 
 const app = express();
