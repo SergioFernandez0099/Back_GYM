@@ -13,14 +13,15 @@ import {
     deleteUserRoutineSet,
     deleteUserTrainingSession,
     getTrainingSessionExercises,
+    getTrainingStats,
     getUser,
     getUserRoutines,
     getUserRoutineSets,
     getUsers,
     getUserTrainingSession,
     getUserTrainingSessions,
-    updateTrainingSessionExerciseOrder,
     updateTrainingSession,
+    updateTrainingSessionExerciseOrder,
     updateUser,
     updateUserRoutine,
     updateUserRoutineSet,
@@ -129,5 +130,8 @@ router.patch(
     validateBody,
     updateTrainingSession
 );
+
+// ESTADÍSTICAS
+router.get("/:id/stats/training", authenticate, validateId, getTrainingStats);
 
 export default router;
