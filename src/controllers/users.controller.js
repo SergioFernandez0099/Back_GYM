@@ -891,3 +891,52 @@ export const updateTrainingSessionExerciseOrder = async (req, res, next) => {
     }
 };
 
+export async function getTrainingStats(req, res, next) {
+    try {
+        const userId = Number(req.params.id);
+        const month = Number(req.query.month);
+        const year = Number(req.query.year);
+
+        const startOfMonth = new Date(year, month - 1, 1);
+        const endOfMonth = new Date(year, month, 1);
+
+        // Contar sesiones del mes
+        const monthlySessions = await prisma.trainingSession.count({
+            where: {
+                userId,
+                date: {
+                    gte: startOfMonth,
+                    lt: endOfMonth,
+                },
+            },
+        });
+
+        // Todas las sesiones del usuario
+        const sessions = await prisma.trainingSession.findMany({
+            where: {userId},
+            select: {date: true},
+        });
+
+        const uniqueDays = new Set(
+            sessions.map(s => s.date.toISOString().split("T")[0])
+        );
+
+        // Obtener nombre del usuario
+        const user = await prisma.user.findUnique({
+            where: { id: userId },
+            select: { name: true },
+        });
+
+        const stats = {
+            username: user.name,
+            monthlySessions,
+            totalTrainingDays: uniqueDays.size,
+        }
+
+        respuesta.success(res, stats);
+    } catch (error) {
+        next(error);
+    }
+}
+
+
