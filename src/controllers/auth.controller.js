@@ -1,7 +1,8 @@
 import prisma from "../prisma/client.js";
 import bcrypt from "bcrypt";
 import {generateToken, verifyToken} from "../auth/jwt.js";
-import respuesta from "../utils/responses.js"; // tu módulo profesional de JWT
+import respuesta from "../utils/responses.js";
+import {ErrorAutenticacion} from "../errors/businessErrors.js"; // tu módulo profesional de JWT
 
 export const loginUser = async (req, res, next) => {
     try {
@@ -19,19 +20,11 @@ export const loginUser = async (req, res, next) => {
             select: {id: true, name: true, pin: true},
         });
 
-        if (!user) {
-            const error = new Error("PIN incorrecto");
-            error.statusCode = 401;
-            throw error;
-        }
+        if (!user) throw new ErrorAutenticacion("Credenciales incorrectas");
 
         // Comparar el PIN enviado con el hash almacenado
         const isValid = await bcrypt.compare(pin, user.pin);
-        if (!isValid) {
-            const error = new Error("PIN incorrecto");
-            error.statusCode = 401;
-            throw error;
-        }
+        if (!isValid) throw new ErrorAutenticacion("Credenciales incorrectas");
 
         // ✅ Generar JWT profesional
         const token = generateToken({userId: user.id, name: user.name});

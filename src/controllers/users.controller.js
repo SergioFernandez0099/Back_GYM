@@ -140,7 +140,7 @@ export const updateUserRoutine = async (req, res, next) => {
         const routineId = Number(req.params.routineId);
         const {name} = req.body;
 
-        if (!name && !description) {
+        if (!name) {
             throw new ErrorIncorrectParam(
                 "Debes enviar al menos un campo para actualizar"
             );
@@ -160,11 +160,6 @@ export const updateUserRoutine = async (req, res, next) => {
         });
 
         respuesta.success(res, updatedRoutine);
-
-        // res.status(200).json({
-        //     message: `Rutina con id ${updatedRoutine.id} actualizada correctamente`,
-        //     routine: updatedRoutine,
-        // });
     } catch (error) {
         next(error);
     }
@@ -321,11 +316,24 @@ export const deleteUserRoutineSet = async (req, res, next) => {
             },
         });
 
-        await prisma.routineSet.delete({where: {id: existing.id}});
+        await prisma.$transaction(async (tx) => {
+            const deletedOrder = existing.order;
 
-        // res.status(200).json({
-        //     message: `Set con id ${existing.id} eliminado correctamente`,
-        // });
+            // Borrar el set
+            await tx.routineSet.delete({ where: { id: existing.id } });
+
+            // Compactar los orders posteriores
+            await tx.routineSet.updateMany({
+                where: {
+                    routineId,
+                    order: { gt: deletedOrder },
+                },
+                data: {
+                    order: { decrement: 1 },
+                },
+            });
+        });
+
         respuesta.success(res, `Set con id ${existing.id} eliminado correctamente`);
     } catch (error) {
         next(error);
@@ -570,33 +578,34 @@ export const createTrainingSessionExercise = async (req, res, next) => {
             where: {id: sessionId, userId},
         });
 
-        const existingExercisesCount = await prisma.trainingSessionExercise.count({
-            where: {sessionId: session.id},
-        });
+        const newExercise = await prisma.$transaction(async (tx) => {
+            const existingExercisesCount = await tx.trainingSessionExercise.count({
+                where: {sessionId: session.id},
+            });
 
-        const newExercise = await prisma.trainingSessionExercise.create({
-            data: {
-                sessionId: session.id,
-                exerciseId,
-                order: existingExercisesCount + 1,
-                series: {
-                    create: Array.from({length: DEFAULT_SERIES}).map((_, i) => ({
-                        order: i + 1,
-                        reps: 0,
-                        weight: null,
-                        intensity: null,
-                        rir: null,
-                        unitId: 1, //Kg
-                    })),
+            return tx.trainingSessionExercise.create({
+                data: {
+                    sessionId: session.id,
+                    exerciseId,
+                    order: existingExercisesCount + 1,
+                    series: {
+                        create: Array.from({length: DEFAULT_SERIES}).map((_, i) => ({
+                            order: i + 1,
+                            reps: 0,
+                            weight: null,
+                            intensity: null,
+                            rir: null,
+                            unitId: 1, //Kg
+                        })),
+                    },
                 },
-            },
-            include: {
-                exercise: true,
-                series: true,
-            },
+                include: {
+                    exercise: true,
+                    series: true,
+                },
+            });
         });
 
-        // res.status(201).json({ok: true, id: newExercise.id});
         respuesta.success(res, {id: newExercise.id}, 201);
     } catch (error) {
         next(error);
@@ -623,35 +632,32 @@ export const createTrainingSessionSerie = async (req, res, next) => {
             },
         });
 
-        // 2. Obtener el último order de las series
-        const lastSerie = await prisma.series.findFirst({
-            where: {
-                sessionExerciseId: sessionExercise.id,
-            },
-            orderBy: {
-                order: "desc",
-            },
-            select: {
-                order: true,
-            },
+        // 2. Usar transacción para calcular order y crear
+        const newSerie = await prisma.$transaction(async (tx) => {
+            const lastSerie = await tx.series.findFirst({
+                where: {
+                    sessionExerciseId: sessionExercise.id,
+                },
+                orderBy: {
+                    order: "desc",
+                },
+                select: {
+                    order: true,
+                },
+            });
+
+            const nextOrder = lastSerie ? lastSerie.order + 1 : 1;
+
+            return tx.series.create({
+                data: {
+                    sessionExerciseId: sessionExercise.id,
+                    order: nextOrder,
+                    reps: 0,
+                    unitId: 1, //Kg
+                },
+            });
         });
 
-        const nextOrder = lastSerie ? lastSerie.order + 1 : 1;
-
-        // 3. Crear la serie
-        const newSerie = await prisma.series.create({
-            data: {
-                sessionExerciseId: sessionExercise.id,
-                order: nextOrder,
-                reps: 0,
-                unitId: 1, //Kg
-            },
-        });
-
-        // res.status(201).json({
-        //     ok: true,
-        //     body: newSerie.id,
-        // });
         respuesta.success(res, {id: newSerie.id}, 201);
 
     } catch (error) {

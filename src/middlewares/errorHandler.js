@@ -7,7 +7,9 @@ import {
     ErrorSolicitud,
 } from "../errors/businessErrors.js";
 import {handlePrismaError} from "../errors/prismaErrors.js";
-import {logger} from "../logger.js";
+import {loggers} from "../logger.js";
+
+;
 
 export function errorHandler(err, req, res, next) {
 
@@ -24,12 +26,13 @@ export function errorHandler(err, req, res, next) {
         err instanceof ErrorIncorrectParam ||
         err instanceof ErrorRegisterNotFound
     ) {
-        logger.warn("Error de negocio", {
-            type: err.constructor.name,
+        loggers.warn("Error de negocio", {
             message: err.message,
-            path: req.path,
+            stack: process.env.NODE_ENV === 'development' ? err.stack : undefined,
             method: req.method,
-            user: req.userId || null
+            url: req.url,
+            ip: req.ip,
+            userId: req.user?.id
         });
 
         let status = 500;
@@ -54,24 +57,25 @@ export function errorHandler(err, req, res, next) {
     // Errores de Prisma
     const prismaErr = handlePrismaError(err);
     if (prismaErr) {
-        logger.error("Error de Prisma", {
-            message: prismaErr.message,
-            code: prismaErr.code,
-            path: req.path,
+        loggers.error("Error de Prisma", {
+            message: err.message,
+            stack: process.env.NODE_ENV === 'development' ? err.stack : undefined,
             method: req.method,
-            user: req.user || null
+            url: req.url,
+            ip: req.ip,
+            userId: req.user?.id
         });
         return respuesta.error(res, prismaErr.message, prismaErr.statusCode);
     }
 
     // Error genérico
-    logger.error("Error interno", {
+    loggers.error("Error interno", {
         message: err.message,
-        stack: err.stack,
-        path: req.path,
+        stack: process.env.NODE_ENV === 'development' ? err.stack : undefined,
         method: req.method,
-        body: req.body,
-        user: req.user || null
+        url: req.url,
+        ip: req.ip,
+        userId: req.user?.id
     });
 
     const mensaje = err.message || "Error interno";
