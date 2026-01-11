@@ -5,33 +5,53 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "run": "pnpm node src/server.js",
-    "dev": "pnpm nodemon src/server.js"
-  },
-  "prisma": {
-    "seed": "node prisma/seed.js"
+    "// ========== DESARROLLO ==========": "",
+    "dev:nodemon": "cross-env NODE_ENV=development nodemon src/server.js",
+    "// ========== PRODUCCIÓN ==========": "",
+    "start": "cross-env NODE_ENV=production node src/server.js",
+    "start:pm2": "pm2 start ecosystem.config.js --env production",
+    "stop:pm2": "pm2 stop gym-api",
+    "restart:pm2": "pm2 restart gym-api",
+    "reload:pm2": "pm2 reload gym-api --update-env",
+    "logs:pm2": "pm2 logs gym-api",
+    "monit:pm2": "pm2 monit",
+    "// ========== PRISMA ==========": "",
+    "prisma:deploy": "prisma migrate deploy",
+    "prisma:status": "prisma migrate status",
+    "db:migrate:reset": "prisma migrate reset",
+    "db:seed": "prisma db seed",
+    "db:reset": "pnpm run db:migrate:reset && pnpm run db:seed"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.26.0+sha512.3b3f6c725ebe712506c0ab1ad4133cf86b1f4b687effce62a9b38b4d72e3954242e643190fc51fa1642949c735f403debd44f5cb0edd657abe63a8b6a7e1e402",
   "devDependencies": {
+    "@types/node": "^25.0.6",
+    "@types/pg": "^8.16.0",
     "dotenv": "^17.2.3",
     "nodemon": "^3.1.10",
-    "prisma": "^6.19.1"
+    "prisma": "^7.2.0",
+    "tsx": "^4.21.0"
   },
   "dependencies": {
-    "@prisma/client": "^6.19.1",
+    "@prisma/adapter-pg": "^7.2.0",
+    "@prisma/client": "^7.2.0",
+    "@prisma/client-runtime-utils": "^7.2.0",
     "bcrypt": "^6.0.0",
     "compression": "^1.8.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "cross-env": "^10.1.0",
     "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
     "express-validator": "^7.2.1",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.1",
+    "path": "^0.12.7",
     "pg": "^8.16.3",
+    "url": "^0.11.4",
     "winston": "^3.19.0",
     "winston-daily-rotate-file": "^5.0.0"
   }

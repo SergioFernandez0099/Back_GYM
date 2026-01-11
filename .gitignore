@@ -1,4 +1,34 @@
-node_modules
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Environment
 .env
-/generated/prima
+.env.local
+.env.production
+.env.*.local
+
+# Logs - IMPORTANTE
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Prisma
+prisma/migrations/**/migration.sql.backup
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
 .idea/
+.vscode/
+*.swp
+*.swo
+
+# Build
+dist/
+build/
