@@ -9,7 +9,7 @@
     "dev:nodemon": "cross-env NODE_ENV=development nodemon src/server.js",
     "// ========== PRODUCCIÓN ==========": "",
     "start": "cross-env NODE_ENV=production node src/server.js",
-    "start:pm2": "pm2 start ecosystem.config.js --env production",
+    "start:pm2": "pm2 start ecosystem.config.cjs --env production",
     "stop:pm2": "pm2 stop gym-api",
     "restart:pm2": "pm2 restart gym-api",
     "reload:pm2": "pm2 reload gym-api --update-env",
