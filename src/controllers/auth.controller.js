@@ -4,6 +4,16 @@ import {generateToken, verifyToken} from "../auth/jwt.js";
 import respuesta from "../utils/responses.js";
 import {ErrorAutenticacion} from "../errors/businessErrors.js"; // tu módulo profesional de JWT
 
+const isProduction = process.env.NODE_ENV === "production";
+
+const cookieOptions = {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? "none" : "lax",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+};
+
+
 export const loginUser = async (req, res, next) => {
     try {
         const {name, pin} = req.body;
@@ -30,12 +40,7 @@ export const loginUser = async (req, res, next) => {
         const token = generateToken({userId: user.id, name: user.name});
 
         // ✅ Guardar token en cookie HttpOnly
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: false, // true en producción (HTTPS)
-            sameSite: "lax", // necesario si frontend está en otro dominio (none con true) (lax con false)
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 días
-        });
+        res.cookie("token", token, cookieOptions);
 
         // ✅ Devolver solo info segura del usuario
         respuesta.success(res, {

@@ -1,10 +1,8 @@
-
 import "dotenv/config";
 import {PrismaPg} from '@prisma/adapter-pg'
 import {PrismaClient} from "../generated/prisma/client.js";
 
 import {logger, loggers} from '../logger.js';
-import {Pool} from "pg";
 
 // Configuración de logs según entorno
 const logConfig = process.env.NODE_ENV === 'development'
@@ -22,14 +20,9 @@ const logConfig = process.env.NODE_ENV === 'development'
 const globalForPrisma = globalThis;
 
 // Configuración del pool de conexiones
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    max: process.env.DB_POOL_MAX ? parseInt(process.env.DB_POOL_MAX) : 20,
-    idleTimeoutMillis: 30000,            // 30 segundos
-    connectionTimeoutMillis: 20000       // 20 segundos
-})
+const connectionString = `${process.env.DATABASE_URL}`
 
-const adapter = new PrismaPg(pool)
+const adapter = new PrismaPg({connectionString})
 
 const prisma = globalForPrisma.prisma || new PrismaClient({
     adapter: adapter,

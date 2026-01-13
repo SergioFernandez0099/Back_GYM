@@ -2,8 +2,8 @@
 import jwt from "jsonwebtoken";
 import { configApp } from "../config/config.js";
 
-const JWT_SECRET = configApp.jwtSecret || "super_secret_key"; // mejor usar variable de entorno
-const JWT_EXPIRES_IN = "7d"; // tiempo de expiración
+const JWT_SECRET = configApp.jwtSecret;
+const JWT_EXPIRES_IN = configApp.expiresIn;
 
 export function generateToken(payload) {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
