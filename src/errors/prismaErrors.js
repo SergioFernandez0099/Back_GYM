@@ -1,5 +1,4 @@
-import pkg from "@prisma/client";
-const { Prisma } = pkg;
+const { Prisma } = "@prisma/client";
 
 export function handlePrismaError(err) {
   if (err instanceof Prisma.PrismaClientKnownRequestError) {

@@ -9,8 +9,6 @@ import {
 import {handlePrismaError} from "../errors/prismaErrors.js";
 import {loggers} from "../logger.js";
 
-;
-
 export function errorHandler(err, req, res, next) {
 
     // 1️⃣ Errores de parsing JSON de express.json()
