@@ -24,6 +24,10 @@ import exercisesRoutes from "./routes/exercises.routes.js";
 import muscleGroupsRoutes from "./routes/muscleGroups.routes.js";
 
 const app = express();
+
+// Esto es para que Express confíe en proxies (como PM2 cluster o Nginx)
+app.set('trust proxy', 1);
+
 const PORT = configApp.port;
 const HOST = configApp.host;
 
