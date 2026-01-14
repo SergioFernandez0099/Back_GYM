@@ -13,7 +13,6 @@ const cookieOptions = {
     maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
-
 export const loginUser = async (req, res, next) => {
     try {
         const {name, pin} = req.body;
@@ -24,7 +23,6 @@ export const loginUser = async (req, res, next) => {
             throw error;
         }
 
-        // Buscar usuario por email
         const user = await prisma.user.findUnique({
             where: {name},
             select: {id: true, name: true, pin: true},
@@ -36,13 +34,12 @@ export const loginUser = async (req, res, next) => {
         const isValid = await bcrypt.compare(pin, user.pin);
         if (!isValid) throw new ErrorAutenticacion("Credenciales incorrectas");
 
-        // ✅ Generar JWT profesional
+        // Generar JWT
         const token = generateToken({userId: user.id, name: user.name});
 
-        // ✅ Guardar token en cookie HttpOnly
+        // Guardar token en cookie HttpOnly
         res.cookie("token", token, cookieOptions);
 
-        // ✅ Devolver solo info segura del usuario
         respuesta.success(res, {
             user: {
                 id: user.id,
@@ -56,12 +53,8 @@ export const loginUser = async (req, res, next) => {
 
 export const logout = async (req, res, next) => {
     try {
-        // ✅ Borrar la cookie del token
-        res.clearCookie("token", {
-            httpOnly: true,
-            secure: false, // true en producción con HTTPS
-            sameSite: "lax",
-        });
+        // Borrar la cookie del token
+        res.clearCookie("token", cookieOptions);
 
         res.status(200).json({message: "Sesión cerrada correctamente"});
     } catch (error) {
@@ -72,13 +65,11 @@ export const logout = async (req, res, next) => {
 export const validateToken = async (req, res, next) => {
     try {
         const token = req.cookies.token;
-        if (!token) {
-            return res.status(401).json({message: "No token"});
-        }
+        if (!token) return res.status(401).json({message: "No token"});
 
         res.set("Cache-Control", "no-store");
-        // Usando tu módulo JWT
-        const decoded = verifyToken(token); // función de tu módulo auth/jwt.js
+
+        const decoded = verifyToken(token);
         if (!decoded) return res.status(401).json({message: "Token inválido"});
         res.status(200).json({userId: decoded.userId, name: decoded.name});
     } catch (err) {

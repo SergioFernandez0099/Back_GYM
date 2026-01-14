@@ -1,4 +1,4 @@
-const { Prisma } = "@prisma/client";
+import { Prisma } from '../generated/prisma/client.js';
 
 export function handlePrismaError(err) {
   if (err instanceof Prisma.PrismaClientKnownRequestError) {

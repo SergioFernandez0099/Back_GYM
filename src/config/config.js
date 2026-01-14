@@ -11,10 +11,8 @@ const envFile = process.env.NODE_ENV === 'production'
     : '.env';
 
 // Cargar el archivo correspondiente
-const envPath = path.resolve(__dirname, '../../', envFile);
+const envPath = path.resolve(__dirname, '../../../', envFile);
 dotenv.config({ path: envPath });
-
-console.log(`📁 Cargando configuración desde: ${envFile}`);
 
 export const configApp = {
   // Entorno
@@ -46,6 +44,7 @@ export const configApp = {
     origin: process.env.CORS_ORIGIN?.split(',') || [
       'http://localhost:5173',
       'http://127.0.0.1:5173',
+      'http://192.168.1.153:4173',
     ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],

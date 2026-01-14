@@ -2,8 +2,8 @@
 import jwt from "jsonwebtoken";
 import { configApp } from "../config/config.js";
 
-const JWT_SECRET = configApp.jwtSecret;
-const JWT_EXPIRES_IN = configApp.expiresIn;
+const JWT_SECRET = configApp.jwt.secret;
+const JWT_EXPIRES_IN = configApp.jwt.expiresIn;
 
 export function generateToken(payload) {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
