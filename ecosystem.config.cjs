@@ -1,7 +1,7 @@
 module.exports = {
     apps: [{
         name: 'gym-api',
-        script: './src/server.js',
+        script: './dist/src/server.js',
         instances: '3',
         exec_mode: 'cluster',
 
