@@ -15,13 +15,15 @@ const cookieOptions = {
 
 export const loginUser = async (req, res, next) => {
     try {
-        const {name, pin} = req.body;
+        let {name, pin} = req.body;
 
         if (!name || !pin) {
             const error = new Error("NAME y PIN son obligatorios");
             error.statusCode = 400;
             throw error;
         }
+
+        name = name.trim().toLowerCase();
 
         const user = await prisma.user.findUnique({
             where: {name},

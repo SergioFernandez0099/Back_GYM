@@ -444,55 +444,55 @@ async function main() {
     const saltRounds = 10;
     const userCarlos = await prisma.user.create({
         data: {
-            name: 'Carlos',
+            name: 'carlos',
             pin: await bcrypt.hash('1234', saltRounds),
         },
     });
     const userAlex = await prisma.user.create({
         data: {
-            name: 'Alex',
+            name: 'alex',
             pin: await bcrypt.hash('0311', saltRounds),
         },
     });
     const userToni = await prisma.user.create({
         data: {
-            name: 'Toni',
+            name: 'toni',
             pin: await bcrypt.hash('6969', saltRounds),
         },
     });
     const userSergio = await prisma.user.create({
         data: {
-            name: 'Sergio',
+            name: 'sergio',
             pin: await bcrypt.hash('9999', saltRounds),
         },
     });
     const userAlessandra = await prisma.user.create({
         data: {
-            name: 'Alessandra',
+            name: 'alessandra',
             pin: await bcrypt.hash('4343', saltRounds),
         },
     });
     const userAngela = await prisma.user.create({
         data: {
-            name: 'Angela',
+            name: 'angela',
             pin: await bcrypt.hash('7777', saltRounds),
         },
     });
     const userLorena = await prisma.user.create({
         data: {
-            name: 'Lorena',
+            name: 'lorena',
             pin: await bcrypt.hash('0707', saltRounds),
         },
     });
     const userStiwy = await prisma.user.create({
         data: {
-            name: 'Stiwy',
+            name: 'stiwy',
             pin: await bcrypt.hash('0303', saltRounds),
         },
     });
     const userLaura = await prisma.user.create({
         data: {
-            name: 'Laura',
+            name: 'laura',
             pin: await bcrypt.hash('2026', saltRounds),
         },
     });
