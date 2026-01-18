@@ -655,10 +655,21 @@ export const createTrainingSessionSerie = async (req, res, next) => {
                     reps: 0,
                     unitId: 1, //Kg
                 },
+                include: {
+                    unit: true, // incluir la unidad para el frontend
+                },
             });
         });
 
-        respuesta.success(res, {id: newSerie.id}, 201);
+        respuesta.success(res, {
+            id: newSerie.id,
+            reps: newSerie.reps,
+            weight: newSerie.weight,
+            intensity: newSerie.intensity,
+            rir: newSerie.rir,
+            order: newSerie.order,
+            unit: newSerie.unit ? { id: newSerie.unit.id, symbol: newSerie.unit.symbol } : null
+        }, 201);
 
     } catch (error) {
         next(error);
