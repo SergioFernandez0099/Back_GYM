@@ -301,6 +301,11 @@ async function main() {
             muscleGroupId: 6
         },
         {
+            name: 'Sentadilla pendular',
+            imageUrl: '/images/exercises/cuadriceps/sentadilla_pendular.avif',
+            muscleGroupId: 6
+        },
+        {
             name: 'Sentadilla sissy',
             imageUrl: '/images/exercises/cuadriceps/sentadilla_sissy.avif',
             muscleGroupId: 6

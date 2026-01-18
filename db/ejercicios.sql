@@ -111,6 +111,7 @@ VALUES ('Extensión de cuádriceps', '/images/exercises/cuadriceps/extensiones.a
        ('Sentadilla belt', '/images/exercises/cuadriceps/sentadilla_belt.avif', 6),
        ('Sentadilla búlgara', '/images/exercises/cuadriceps/sentadilla_bulgara.avif', 6),
        ('Sentadilla frontal', '/images/exercises/cuadriceps/sentadilla_frontal.avif', 6),
+       ('Sentadilla pendular', '/images/exercises/cuadriceps/sentadilla_pendular.avif', 6),
        ('Sentadilla goblet', '/images/exercises/cuadriceps/sentadilla_goblet.avif', 6),
        ('Sentadilla en multipower', '/images/exercises/cuadriceps/sentadilla_multipower.avif', 6),
        ('Sentadilla con safety bar', '/images/exercises/cuadriceps/sentadilla_safety_bar.avif', 6),
