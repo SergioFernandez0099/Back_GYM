@@ -366,10 +366,7 @@ export const getUserTrainingSession = async (req, res, next) => {
         const sessionId = Number(req.params.sessionId);
 
         const session = await prisma.trainingSession.findFirstOrThrow({
-            where: {
-                id: sessionId,
-                userId: userId,
-            },
+            where: { id: sessionId, userId },
             select: {
                 id: true,
                 date: true,
@@ -380,42 +377,67 @@ export const getUserTrainingSession = async (req, res, next) => {
                         id: true,
                         order: true,
                         description: true,
-                        exercise: {
-                            select: {
-                                id: true,
-                                name: true,
-                                imageUrl: true,
-                            }
-                        },
+                        exercise: { select: { id: true, name: true, imageUrl: true } },
                         series: {
                             select: {
-                                id: true,
-                                order: true,
-                                reps: true,
-                                weight: true,
-                                rir: true,
-                                intensity: true,
-                                unit: {
-                                    select: {
-                                        id: true,
-                                        name: true,
-                                        symbol: true,
-                                    }
-                                },
+                                id: true, order: true, reps: true, weight: true, rir: true, intensity: true,
+                                unit: { select: { id: true, name: true, symbol: true } }
                             },
-                            orderBy: {
-                                order: 'asc',
-                            },
-                        }
+                            orderBy: { order: 'asc' }
+                        },
                     },
-                    orderBy: {
-                        order: 'asc',
-                    },
-                }
-            }
+                    orderBy: { order: 'asc' },
+                },
+            },
         });
 
-        respuesta.success(res, session);
+// Obtener todos los IDs de ejercicios de la sesión
+        const exerciseIds = session.sessionExercises.map(se => se.exercise.id);
+
+// Traer **todas las sesiones anteriores de estos ejercicios** en un solo query
+        const historyRaw = await prisma.trainingSession.findMany({
+            where: {
+                userId,
+                date: { lt: session.date },
+                sessionExercises: { some: { exerciseId: { in: exerciseIds } } },
+            },
+            select: {
+                id: true,
+                date: true,
+                sessionExercises: {
+                    where: { exerciseId: { in: exerciseIds } },
+                    select: {
+                        exerciseId: true,
+                        series: {
+                            select: {
+                                order: true, reps: true, weight: true, rir: true, intensity: true,
+                                unit: { select: { id: true, name: true, symbol: true } }
+                            },
+                            orderBy: { order: 'asc' }
+                        },
+                    },
+                },
+            },
+            orderBy: { date: 'desc' },
+        });
+
+// Mapear el historial a cada ejercicio
+        const sessionWithHistory = {
+            ...session,
+            sessionExercises: session.sessionExercises.map(se => ({
+                ...se,
+                history: historyRaw
+                    .map(h => {
+                        const match = h.sessionExercises.find(e => e.exerciseId === se.exercise.id);
+                        if (!match) return null;
+                        return { sessionDate: h.date, series: match.series };
+                    })
+                    .filter(Boolean)
+                    .slice(0, 5), // últimas 5 sesiones
+            })),
+        };
+
+        respuesta.success(res, sessionWithHistory);
     } catch (error) {
         next(error);
     }
