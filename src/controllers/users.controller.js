@@ -212,6 +212,9 @@ export const createUserRoutineSet = async (req, res, next) => {
         const routineId = Number(req.params.routineId);
         const {exerciseId, series, repetitions, description} = req.body;
 
+        const normalizedDescription =
+            description && description.trim() !== "" ? description.trim() : null;
+
         if (!exerciseId || !series || !repetitions) {
             throw new ErrorIncorrectParam("Faltan parámetros obligatorios");
         }
@@ -233,10 +236,10 @@ export const createUserRoutineSet = async (req, res, next) => {
             return tx.routineSet.create({
                 data: {
                     routineId: routine.id,
-                    exerciseId,
-                    series,
-                    repetitions,
-                    description,
+                    exerciseId: exerciseId,
+                    series: series,
+                    repetitions: repetitions,
+                    description: normalizedDescription,
                     order: newOrder,
                 },
                 include: {exercise: true},
@@ -245,6 +248,7 @@ export const createUserRoutineSet = async (req, res, next) => {
 
         respuesta.success(res, newSet, 201);
     } catch (error) {
+        console.log(error)
         next(error);
     }
 };
@@ -284,16 +288,14 @@ export const updateUserRoutineSet = async (req, res, next) => {
             data: {
                 ...(series !== undefined && {series}),
                 ...(repetitions !== undefined && {repetitions}),
-                ...(description !== undefined && {description}),
+                ...(description !== undefined && {
+                    description: description?.trim() || null
+                }),
                 ...(exerciseId !== undefined && {exerciseId}),
             },
             include: {exercise: true},
         });
 
-        // res.status(200).json({
-        //     message: `Set con id ${updatedSet.id} actualizado correctamente`,
-        //     set: updatedSet,
-        // });
         respuesta.success(res, updatedSet);
     } catch (error) {
         next(error);
@@ -320,16 +322,16 @@ export const deleteUserRoutineSet = async (req, res, next) => {
             const deletedOrder = existing.order;
 
             // Borrar el set
-            await tx.routineSet.delete({ where: { id: existing.id } });
+            await tx.routineSet.delete({where: {id: existing.id}});
 
             // Compactar los orders posteriores
             await tx.routineSet.updateMany({
                 where: {
                     routineId,
-                    order: { gt: deletedOrder },
+                    order: {gt: deletedOrder},
                 },
                 data: {
-                    order: { decrement: 1 },
+                    order: {decrement: 1},
                 },
             });
         });
@@ -366,7 +368,7 @@ export const getUserTrainingSession = async (req, res, next) => {
         const sessionId = Number(req.params.sessionId);
 
         const session = await prisma.trainingSession.findFirstOrThrow({
-            where: { id: sessionId, userId },
+            where: {id: sessionId, userId},
             select: {
                 id: true,
                 date: true,
@@ -377,16 +379,16 @@ export const getUserTrainingSession = async (req, res, next) => {
                         id: true,
                         order: true,
                         description: true,
-                        exercise: { select: { id: true, name: true, imageUrl: true } },
+                        exercise: {select: {id: true, name: true, imageUrl: true}},
                         series: {
                             select: {
                                 id: true, order: true, reps: true, weight: true, rir: true, intensity: true,
-                                unit: { select: { id: true, name: true, symbol: true } }
+                                unit: {select: {id: true, name: true, symbol: true}}
                             },
-                            orderBy: { order: 'asc' }
+                            orderBy: {order: 'asc'}
                         },
                     },
-                    orderBy: { order: 'asc' },
+                    orderBy: {order: 'asc'},
                 },
             },
         });
@@ -398,27 +400,27 @@ export const getUserTrainingSession = async (req, res, next) => {
         const historyRaw = await prisma.trainingSession.findMany({
             where: {
                 userId,
-                date: { lt: session.date },
-                sessionExercises: { some: { exerciseId: { in: exerciseIds } } },
+                id: {not: session.id},
+                sessionExercises: {some: {exerciseId: {in: exerciseIds}}},
             },
             select: {
                 id: true,
                 date: true,
                 sessionExercises: {
-                    where: { exerciseId: { in: exerciseIds } },
+                    where: {exerciseId: {in: exerciseIds}},
                     select: {
                         exerciseId: true,
                         series: {
                             select: {
                                 order: true, reps: true, weight: true, rir: true, intensity: true,
-                                unit: { select: { id: true, name: true, symbol: true } }
+                                unit: {select: {id: true, name: true, symbol: true}}
                             },
-                            orderBy: { order: 'asc' }
+                            orderBy: {order: 'asc'}
                         },
                     },
                 },
             },
-            orderBy: { date: 'desc' },
+            orderBy: {date: 'desc'},
         });
 
 // Mapear el historial a cada ejercicio
@@ -430,7 +432,7 @@ export const getUserTrainingSession = async (req, res, next) => {
                     .map(h => {
                         const match = h.sessionExercises.find(e => e.exerciseId === se.exercise.id);
                         if (!match) return null;
-                        return { sessionDate: h.date, series: match.series };
+                        return {sessionDate: h.date, series: match.series};
                     })
                     .filter(Boolean)
                     .slice(0, 5), // últimas 5 sesiones
@@ -511,11 +513,11 @@ export const createUserTrainingSession = async (req, res, next) => {
                     create: routine.sets.map((set) => ({
                         exerciseId: set.exerciseId,
                         order: set.order,
-                        description: set.description,
+                        description: set.description ?? null,
                         series: {
                             create: Array.from({length: set.series}).map((_, i) => ({
                                 order: i + 1,
-                                reps: 1,
+                                reps: 0,
                                 unitId: 1,
                             })),
                         },
@@ -690,7 +692,7 @@ export const createTrainingSessionSerie = async (req, res, next) => {
             intensity: newSerie.intensity,
             rir: newSerie.rir,
             order: newSerie.order,
-            unit: newSerie.unit ? { id: newSerie.unit.id, symbol: newSerie.unit.symbol } : null
+            unit: newSerie.unit ? {id: newSerie.unit.id, symbol: newSerie.unit.symbol} : null
         }, 201);
 
     } catch (error) {
@@ -760,8 +762,13 @@ export const updateTrainingSession = async (req, res, next) => {
 
         const {series, description} = req.body;
 
+        const normalizedDescription =
+            description !== undefined
+                ? description.trim() === "" ? null : description.trim()
+                : undefined;
+
         // Validar que al menos uno de los dos campos está presente
-        if ((!Array.isArray(series) || series.length === 0) && !description) {
+        if ((!Array.isArray(series) || series.length === 0) && normalizedDescription === undefined) {
             return res.status(400).json({
                 ok: false,
                 message: "Debe proporcionar series o descripción para actualizar",
@@ -784,11 +791,11 @@ export const updateTrainingSession = async (req, res, next) => {
         const operations = [];
 
         // Si hay descripción, actualizar el TrainingSessionExercise
-        if (description !== undefined) {
+        if (normalizedDescription !== undefined) {
             operations.push(
                 prisma.trainingSessionExercise.update({
                     where: {id: exerciseInSessionId},
-                    data: {description: description},
+                    data: {description: normalizedDescription},
                 })
             );
         }
@@ -828,6 +835,7 @@ export const updateTrainingSession = async (req, res, next) => {
         next(error);
     }
 };
+
 export const deleteTrainingSessionSerie = async (req, res, next) => {
     try {
         const userId = Number(req.params.id);
@@ -962,8 +970,8 @@ export async function getTrainingStats(req, res, next) {
 
         // Obtener nombre del usuario
         const user = await prisma.user.findUnique({
-            where: { id: userId },
-            select: { name: true },
+            where: {id: userId},
+            select: {name: true},
         });
 
         const stats = {
