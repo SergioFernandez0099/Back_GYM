@@ -16,6 +16,7 @@ import {
     getUserRoutineSets,
     getUserTrainingSession,
     getUserTrainingSessions,
+    updateRoutineSetsOrder,
     updateTrainingSession,
     updateTrainingSessionExerciseOrder,
     updateUserRoutine,
@@ -70,6 +71,13 @@ router.post(
     validateId,
     validateBody,
     createUserRoutineSet
+);
+router.put(
+    "/:id/routines/:routineId/sets/order",
+    authenticateAndAuthorize,
+    validateId,
+    validateBody,
+    updateRoutineSetsOrder
 );
 router.patch(
     "/:id/routines/:routineId/sets/:setId",

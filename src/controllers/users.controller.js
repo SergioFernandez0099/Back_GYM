@@ -253,7 +253,6 @@ export const createUserRoutineSet = async (req, res, next) => {
     }
 };
 
-
 export const updateUserRoutineSet = async (req, res, next) => {
     try {
         const userId = Number(req.params.id);
@@ -301,6 +300,75 @@ export const updateUserRoutineSet = async (req, res, next) => {
         next(error);
     }
 };
+
+export const updateRoutineSetsOrder = async (req, res, next) => {
+    try {
+        const userId = Number(req.params.id);
+        const routineId = Number(req.params.routineId);
+        const { order } = req.body;
+
+        if (!Array.isArray(order) || order.length === 0) {
+            throw new ErrorIncorrectParam(
+                "Debes enviar un array con el nuevo orden de los sets"
+            );
+        }
+
+        const routine = await prisma.routine.findFirstOrThrow({
+            where: {
+                id: routineId,
+                userId,
+            },
+            include: {
+                sets: true,
+            },
+        });
+
+        if (order.length !== routine.sets.length) {
+            throw new ErrorIncorrectParam(
+                "El número de sets no coincide con los de la rutina"
+            );
+        }
+
+        const existingSetIds = routine.sets.map(rs => rs.id);
+
+        const invalidIds = order.filter(
+            id => !existingSetIds.includes(id)
+        );
+
+        if (invalidIds.length > 0) {
+            throw new ErrorIncorrectParam(
+                "El array contiene sets que no pertenecen a la rutina"
+            );
+        }
+
+        await prisma.$transaction(async tx => {
+            // 1️⃣ Asignar órdenes temporales (evita conflicto UNIQUE)
+            for (let i = 0; i < order.length; i++) {
+                await tx.routineSet.update({
+                    where: { id: order[i] },
+                    data: { order: 1000 + i },
+                });
+            }
+
+            // 2️⃣ Asignar órdenes definitivos
+            for (let i = 0; i < order.length; i++) {
+                await tx.routineSet.update({
+                    where: { id: order[i] },
+                    data: { order: i + 1 },
+                });
+            }
+        });
+
+        respuesta.success(res, {
+            message: "Orden de ejercicios actualizado correctamente",
+        });
+    } catch (error) {
+        console.log(error)
+        next(error);
+    }
+};
+
+
 
 export const deleteUserRoutineSet = async (req, res, next) => {
     try {
