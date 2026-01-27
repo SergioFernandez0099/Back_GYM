@@ -87,7 +87,7 @@ export const deleteUser = async (req, res, next) => {
 
 export const getUserRoutines = async (req, res, next) => {
     try {
-        const userId = Number(req.params.id); // usamos :id de la URL
+        const userId = Number(req.params.id);
 
         const routines = await prisma.routine.findMany({
             where: {userId},
@@ -95,6 +95,9 @@ export const getUserRoutines = async (req, res, next) => {
                 id: true,
                 name: true,
             },
+            orderBy: {
+                name: "asc",
+            }
         });
 
         respuesta.success(res, routines);
@@ -180,15 +183,22 @@ export const getUserRoutineSets = async (req, res, next) => {
         const userId = Number(req.params.id);
         const routineId = Number(req.params.routineId);
 
+        if (!userId || !routineId) {
+            throw new ErrorIncorrectParam("Faltan parámetros obligatorios");
+        }
+
         const sets = await prisma.routineSet.findMany({
             where: {
                 routineId,
                 routine: {
-                    userId, // aseguramos que la rutina pertenece al usuario
+                    userId,
                 },
             },
             include: {
-                exercise: true, // si quieres info del ejercicio (nombre, imagen, etc.)
+                exercise: true,
+            },
+            orderBy: {
+                order: 'asc',
             },
         });
 
@@ -359,43 +369,76 @@ export const updateRoutineSetsOrder = async (req, res, next) => {
     }
 };
 
-
 export const deleteUserRoutineSet = async (req, res, next) => {
     try {
         const userId = Number(req.params.id);
         const routineId = Number(req.params.routineId);
         const setId = Number(req.params.setId);
 
-        const existing = await prisma.routineSet.findFirstOrThrow({
-            where: {
-                id: setId,
-                routine: {
-                    id: routineId,
-                    userId,
-                },
-            },
-        });
+        // Validación de parámetros
+        if (!userId || !routineId || !setId) {
+            throw new ErrorIncorrectParam("Parámetros inválidos");
+        }
 
         await prisma.$transaction(async (tx) => {
+            // 1️⃣ Verificar ownership y obtener order
+            const existing = await tx.routineSet.findFirst({
+                where: {
+                    id: setId,
+                    routine: {
+                        id: routineId,
+                        userId,
+                    },
+                },
+                select: {
+                    id: true,
+                    order: true,
+                },
+            });
+
+            if (!existing) {
+                const error = new Error('Set no encontrado o sin permisos');
+                error.statusCode = 404;
+                throw error;
+            }
+
             const deletedOrder = existing.order;
 
-            // Borrar el set
-            await tx.routineSet.delete({where: {id: existing.id}});
+            // 2️⃣ Borrar el set
+            await tx.routineSet.delete({
+                where: {id: existing.id}
+            });
 
-            // Compactar los orders posteriores
+            // 3️⃣ Mover a zona segura NEGATIVA (evita violación de constraint única)
             await tx.routineSet.updateMany({
                 where: {
                     routineId,
                     order: {gt: deletedOrder},
                 },
                 data: {
-                    order: {decrement: 1},
+                    order: {decrement: 10000},
                 },
             });
+
+            // 4️⃣ Compactar correctamente (decrementar 1 neto)
+            await tx.routineSet.updateMany({
+                where: {
+                    routineId,
+                    order: {lt: 0}, // Los que están en zona negativa
+                },
+                data: {
+                    order: {increment: 9999}, // -10000 + 9999 = -1 neto
+                },
+            });
+        }, {
+            maxWait: 5000,
+            timeout: 10000,
+            isolationLevel: 'Serializable'
         });
 
-        respuesta.success(res, `Set con id ${existing.id} eliminado correctamente`, 200);
+        respuesta.success(res, 'Set eliminado correctamente', 200);
     } catch (error) {
+        console.error('Error eliminando set:', error);
         next(error);
     }
 };
@@ -792,17 +835,17 @@ export const deleteTrainingSessionExercise = async (req, res, next) => {
 
             // 2️⃣ Borrar el ejercicio
             await tx.trainingSessionExercise.delete({
-                where: { id: exercise.id },
+                where: {id: exercise.id},
             });
 
             // 3️⃣ Mover a zona segura NEGATIVA (evita colisiones)
             await tx.trainingSessionExercise.updateMany({
                 where: {
                     sessionId,
-                    order: { gt: deletedOrder },
+                    order: {gt: deletedOrder},
                 },
                 data: {
-                    order: { decrement: 10000 },
+                    order: {decrement: 10000},
                 },
             });
 
@@ -810,10 +853,10 @@ export const deleteTrainingSessionExercise = async (req, res, next) => {
             await tx.trainingSessionExercise.updateMany({
                 where: {
                     sessionId,
-                    order: { lt: 0 }, // Los que están en zona negativa
+                    order: {lt: 0}, // Los que están en zona negativa
                 },
                 data: {
-                    order: { increment: 9999 }, // -10000 + 9999 = -1 neto
+                    order: {increment: 9999}, // -10000 + 9999 = -1 neto
                 },
             });
         }, {
