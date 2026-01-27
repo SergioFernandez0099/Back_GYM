@@ -67,12 +67,6 @@ export const updateUser = async (req, res, next) => {
         });
 
         respuesta.success(res, updatedUser);
-
-        // res.status(200).json({
-        //     message: `Usuario con id ${updatedUser.id} actualizado correctamente`,
-        //     user: updatedUser,
-        //     pinUpdated: pin !== undefined,
-        // });
     } catch (error) {
         next(error);
     }
@@ -84,10 +78,8 @@ export const deleteUser = async (req, res, next) => {
         const deletedUser = await prisma.user.delete({
             where: {id: id},
         });
-        // res.status(200).json({
-        //     message: `Usuario con id ${deletedUser.id} borrado correctamente`,
-        // });
-        respuesta.success(res, `Usuario con id ${deletedUser.id} borrado correctamente`);
+
+        respuesta.success(res, `Usuario con id ${deletedUser.id} borrado correctamente`, 200);
     } catch (error) {
         next(error);
     }
@@ -177,7 +169,7 @@ export const deleteUserRoutine = async (req, res, next) => {
 
         await prisma.routine.delete({where: {id: routine.id}});
 
-        respuesta.success(res, `Rutina con id ${routine.id} eliminada correctamente`);
+        respuesta.success(res, `Rutina con id ${routine.id} eliminada correctamente`, 200);
     } catch (error) {
         next(error);
     }
@@ -248,7 +240,6 @@ export const createUserRoutineSet = async (req, res, next) => {
 
         respuesta.success(res, newSet, 201);
     } catch (error) {
-        console.log(error)
         next(error);
     }
 };
@@ -305,7 +296,7 @@ export const updateRoutineSetsOrder = async (req, res, next) => {
     try {
         const userId = Number(req.params.id);
         const routineId = Number(req.params.routineId);
-        const { order } = req.body;
+        const {order} = req.body;
 
         if (!Array.isArray(order) || order.length === 0) {
             throw new ErrorIncorrectParam(
@@ -345,16 +336,16 @@ export const updateRoutineSetsOrder = async (req, res, next) => {
             // 1️⃣ Asignar órdenes temporales (evita conflicto UNIQUE)
             for (let i = 0; i < order.length; i++) {
                 await tx.routineSet.update({
-                    where: { id: order[i] },
-                    data: { order: 1000 + i },
+                    where: {id: order[i]},
+                    data: {order: 1000 + i},
                 });
             }
 
             // 2️⃣ Asignar órdenes definitivos
             for (let i = 0; i < order.length; i++) {
                 await tx.routineSet.update({
-                    where: { id: order[i] },
-                    data: { order: i + 1 },
+                    where: {id: order[i]},
+                    data: {order: i + 1},
                 });
             }
         });
@@ -367,7 +358,6 @@ export const updateRoutineSetsOrder = async (req, res, next) => {
         next(error);
     }
 };
-
 
 
 export const deleteUserRoutineSet = async (req, res, next) => {
@@ -404,7 +394,7 @@ export const deleteUserRoutineSet = async (req, res, next) => {
             });
         });
 
-        respuesta.success(res, `Set con id ${existing.id} eliminado correctamente`);
+        respuesta.success(res, `Set con id ${existing.id} eliminado correctamente`, 200);
     } catch (error) {
         next(error);
     }
@@ -461,10 +451,10 @@ export const getUserTrainingSession = async (req, res, next) => {
             },
         });
 
-// Obtener todos los IDs de ejercicios de la sesión
+        // Obtener todos los IDs de ejercicios de la sesión
         const exerciseIds = session.sessionExercises.map(se => se.exercise.id);
 
-// Traer **todas las sesiones anteriores de estos ejercicios** en un solo query
+        // Traer **todas las sesiones anteriores de estos ejercicios** en un solo query
         const historyRaw = await prisma.trainingSession.findMany({
             where: {
                 userId,
@@ -491,7 +481,7 @@ export const getUserTrainingSession = async (req, res, next) => {
             orderBy: {date: 'desc'},
         });
 
-// Mapear el historial a cada ejercicio
+        // Mapear el historial a cada ejercicio
         const sessionWithHistory = {
             ...session,
             sessionExercises: session.sessionExercises.map(se => ({
@@ -606,7 +596,6 @@ export const createUserTrainingSession = async (req, res, next) => {
             },
         });
 
-        // res.status(201).json({ok: true, id: session.id});
         respuesta.success(res, {id: session.id});
     } catch (error) {
         next(error);
@@ -624,10 +613,7 @@ export const deleteUserTrainingSession = async (req, res, next) => {
 
         await prisma.trainingSession.delete({where: {id: existing.id}});
 
-        res.status(200).json({
-            ok: true,
-            message: `Sesión ${existing.id} eliminada correctamente`
-        });
+        respuesta.success(res, `Sesión ${existing.id} eliminada correctamente`, 200);
     } catch (error) {
         next(error);
     }
@@ -774,49 +760,71 @@ export const deleteTrainingSessionExercise = async (req, res, next) => {
         const sessionId = Number(req.params.sessionId);
         const exerciseInSessionId = Number(req.params.exerciseInSessionId);
 
-        // 1. Obtener el ejercicio y validar propiedad
-        const exercise = await prisma.trainingSessionExercise.findFirstOrThrow({
-            where: {
-                id: exerciseInSessionId,
-                session: {
-                    id: sessionId,
-                    userId,
+        if (!userId || !sessionId || !exerciseInSessionId) {
+            return res.status(400).json({
+                error: 'Parámetros inválidos'
+            });
+        }
+
+        await prisma.$transaction(async (tx) => {
+            // 1️⃣ Verificar ownership y obtener order
+            const exercise = await tx.trainingSessionExercise.findFirst({
+                where: {
+                    id: exerciseInSessionId,
+                    session: {
+                        id: sessionId,
+                        userId,
+                    },
                 },
-            },
-            select: {
-                id: true,
-                order: true,
-            },
+                select: {
+                    id: true,
+                    order: true,
+                },
+            });
+
+            if (!exercise) {
+                const error = new Error('Ejercicio no encontrado o sin permisos');
+                error.statusCode = 404;
+                throw error;
+            }
+
+            const deletedOrder = exercise.order;
+
+            // 2️⃣ Borrar el ejercicio
+            await tx.trainingSessionExercise.delete({
+                where: { id: exercise.id },
+            });
+
+            // 3️⃣ Mover a zona segura NEGATIVA (evita colisiones)
+            await tx.trainingSessionExercise.updateMany({
+                where: {
+                    sessionId,
+                    order: { gt: deletedOrder },
+                },
+                data: {
+                    order: { decrement: 10000 },
+                },
+            });
+
+            // 4️⃣ Volver a posición correcta (decrementando 1 neto)
+            await tx.trainingSessionExercise.updateMany({
+                where: {
+                    sessionId,
+                    order: { lt: 0 }, // Los que están en zona negativa
+                },
+                data: {
+                    order: { increment: 9999 }, // -10000 + 9999 = -1 neto
+                },
+            });
+        }, {
+            maxWait: 5000,
+            timeout: 10000,
+            isolationLevel: 'Serializable'
         });
 
-        const deletedOrder = exercise.order;
-
-        // 2. Borrar el ejercicio (series en cascade)
-        await prisma.trainingSessionExercise.delete({
-            where: {id: exercise.id},
-        });
-
-        // 3. Compactar el order (solo los posteriores)
-        await prisma.trainingSessionExercise.updateMany({
-            where: {
-                sessionId,
-                order: {
-                    gt: deletedOrder,
-                },
-            },
-            data: {
-                order: {
-                    decrement: 1,
-                },
-            },
-        });
-
-        // res.status(200).json({
-        //     ok: true,
-        //     body: `Ejercicio eliminado correctamente`,
-        // });
-        respuesta.success(res, `Ejercicio eliminado correctamente`);
+        respuesta.success(res, 'Ejercicio eliminado correctamente');
     } catch (error) {
+        console.error('Error eliminando ejercicio:', error);
         next(error);
     }
 };
@@ -837,10 +845,7 @@ export const updateTrainingSession = async (req, res, next) => {
 
         // Validar que al menos uno de los dos campos está presente
         if ((!Array.isArray(series) || series.length === 0) && normalizedDescription === undefined) {
-            return res.status(400).json({
-                ok: false,
-                message: "Debe proporcionar series o descripción para actualizar",
-            });
+            throw new ErrorIncorrectParam("Debe proporcionar series o descripción para actualizar");
         }
 
         // 1. Validar que el ejercicio pertenece al usuario
@@ -952,10 +957,6 @@ export const deleteTrainingSessionSerie = async (req, res, next) => {
             },
         });
 
-        // res.status(200).json({
-        //     ok: true,
-        //     body: "Serie eliminada correctamente",
-        // });
         respuesta.success(res, `Serie eliminada correctamente`);
     } catch (error) {
         next(error);
@@ -967,9 +968,7 @@ export const updateTrainingSessionExerciseOrder = async (req, res, next) => {
     const orderedExerciseIds = req.body;
 
     if (!Array.isArray(orderedExerciseIds)) {
-        return res.status(400).json({
-            error: "orderedExerciseIds debe ser un array"
-        });
+        throw new ErrorIncorrectParam("orderedExerciseIds debe ser un array");
     }
 
     try {
@@ -1053,5 +1052,3 @@ export async function getTrainingStats(req, res, next) {
         next(error);
     }
 }
-
-
