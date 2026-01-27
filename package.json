@@ -1,12 +1,13 @@
 {
-  "name": "Back_GYM",
+  "name": "back-gym",
   "version": "1.0.0",
-  "description": "",
+  "author": "Sergio Fernández Muñoz",
+  "license": "MIT",
+  "description": "Backend que proporciona una API para gestionar una aplicación de sesiones de entrenamiento.",
   "main": "server.js",
   "type": "module",
   "scripts": {
     "// ========== DESARROLLO ==========": "",
-    "dev:nodemon": "cross-env NODE_ENV=development nodemon src/server.js",
     "build": "pnpm tsc",
     "dev": "pnpm tsc && node ./dist/src/server.js",
     "// ========== PRODUCCIÓN ==========": "",
@@ -25,8 +26,6 @@
     "db:reset": "pnpm run db:migrate:reset && pnpm run db:seed"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
   "packageManager": "pnpm@10.26.0+sha512.3b3f6c725ebe712506c0ab1ad4133cf86b1f4b687effce62a9b38b4d72e3954242e643190fc51fa1642949c735f403debd44f5cb0edd657abe63a8b6a7e1e402",
   "devDependencies": {
     "@types/node": "^25.0.6",
