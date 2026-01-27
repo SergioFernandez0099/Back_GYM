@@ -145,7 +145,6 @@ Para facilitar el acceso, puedes usar las siguientes credenciales genéricas:
 
 > Estas credenciales son solo para pruebas y no contienen información real.
 
-
 ## 📖 Licencia
 
 Este proyecto es open source. Revisa el archivo `LICENSE` para más detalles.
