@@ -480,6 +480,7 @@ export const getUserTrainingSession = async (req, res, next) => {
                         id: true,
                         order: true,
                         description: true,
+                        targetreps: true,
                         exercise: {select: {id: true, name: true, imageUrl: true}},
                         series: {
                             select: {
@@ -497,7 +498,7 @@ export const getUserTrainingSession = async (req, res, next) => {
         // Obtener todos los IDs de ejercicios de la sesión
         const exerciseIds = session.sessionExercises.map(se => se.exercise.id);
 
-        // Traer **todas las sesiones anteriores de estos ejercicios** en un solo query
+        // Traer todas las sesiones anteriores de estos ejercicios en un solo query
         const historyRaw = await prisma.trainingSession.findMany({
             where: {
                 userId,
@@ -511,6 +512,7 @@ export const getUserTrainingSession = async (req, res, next) => {
                     where: {exerciseId: {in: exerciseIds}},
                     select: {
                         exerciseId: true,
+                        description: true,
                         series: {
                             select: {
                                 order: true, reps: true, weight: true, rir: true, intensity: true,
@@ -524,6 +526,8 @@ export const getUserTrainingSession = async (req, res, next) => {
             orderBy: {date: 'desc'},
         });
 
+        console.log()
+
         // Mapear el historial a cada ejercicio
         const sessionWithHistory = {
             ...session,
@@ -533,7 +537,11 @@ export const getUserTrainingSession = async (req, res, next) => {
                     .map(h => {
                         const match = h.sessionExercises.find(e => e.exerciseId === se.exercise.id);
                         if (!match) return null;
-                        return {sessionDate: h.date, series: match.series};
+                        return {
+                            sessionDate: h.date,
+                            description: match.description,
+                            series: match.series
+                        };
                     })
                     .filter(Boolean)
                     .slice(0, 5), // últimas 5 sesiones
@@ -542,10 +550,10 @@ export const getUserTrainingSession = async (req, res, next) => {
 
         respuesta.success(res, sessionWithHistory);
     } catch (error) {
+        console.log(error);
         next(error);
     }
 };
-
 
 export const createUserTrainingSession = async (req, res, next) => {
     try {
@@ -615,6 +623,7 @@ export const createUserTrainingSession = async (req, res, next) => {
                         exerciseId: set.exerciseId,
                         order: set.order,
                         description: set.description ?? null,
+                        targetreps: set.repetitions,
                         series: {
                             create: Array.from({length: set.series}).map((_, i) => ({
                                 order: i + 1,

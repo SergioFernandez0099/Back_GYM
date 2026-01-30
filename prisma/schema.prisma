@@ -103,6 +103,7 @@ model TrainingSessionExercise {
   sessionId   Int
   order       Int
   description String?
+  targetreps  Int?
   createdAt   DateTime @default(now())
 
   exercise Exercise        @relation(fields: [exerciseId], references: [id])
