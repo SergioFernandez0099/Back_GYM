@@ -19,6 +19,7 @@ yarn-error.log*
 # Prisma
 prisma/migrations/**/migration.sql.backup
 src/generated/prisma
+prisma/seed.js
 
 # OS
 .DS_Store
